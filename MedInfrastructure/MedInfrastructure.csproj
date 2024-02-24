@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MedApplication\MedApplication.csproj" />
+    <ProjectReference Include="..\MedPersistance\MedPersistance.csproj" />
+  </ItemGroup>
+
 </Project>
