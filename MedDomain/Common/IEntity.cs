@@ -8,5 +8,5 @@ public interface IEntity
     /// <value>
     /// The unique identifier of the entity.
     /// </value>
-    public int Id { get; set; }
+    public int Id { get; set; } 
 }
