@@ -8,23 +8,20 @@ using System.Threading.Tasks;
 using MedDomain.Common;
 
 namespace MedDomain.Entities;
-/// <summary>
-/// enum_gender
-/// </summary>
-[Table("gender")]
-public class Gender : IEntity
+
+[Table("role")]
+public class Role : IEntity
 {
     [Key]
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("short_name")]
+    [Column("name")]
     [StringLength(100)]
-    public string ShortName { get; set; } = null!;
+    public string Name { get; set; } = null!;
 
-    [Column("full_name")]
-    [StringLength(100)]
-    public string FullName { get; set; } = null!;
+    [Column("roletype_id")]
+    public int RoletypeId { get; set; }
 
     [Column("created_date", TypeName = "timestamp without time zone")]
     public DateTime CreatedDate { get; set; }
@@ -38,6 +35,10 @@ public class Gender : IEntity
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }
 
-    [InverseProperty("Gender")]
+    [ForeignKey("RoletypeId")]
+    [InverseProperty("Roles")]
+    public virtual Roletype Roletype { get; set; } = null!;
+
+    [InverseProperty("Role")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
 }

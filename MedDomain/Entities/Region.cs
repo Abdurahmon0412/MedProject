@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 using MedDomain.Common;
 
 namespace MedDomain.Entities;
-/// <summary>
-/// enum_gender
-/// </summary>
-[Table("gender")]
-public class Gender : IEntity
+
+[Table("region")]
+public class Region : IEntity
 {
     [Key]
     [Column("id")]
@@ -26,6 +24,9 @@ public class Gender : IEntity
     [StringLength(100)]
     public string FullName { get; set; } = null!;
 
+    [Column("oblast_id")]
+    public int OblastId { get; set; }
+
     [Column("created_date", TypeName = "timestamp without time zone")]
     public DateTime CreatedDate { get; set; }
 
@@ -38,6 +39,14 @@ public class Gender : IEntity
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }
 
-    [InverseProperty("Gender")]
+    [ForeignKey("OblastId")]
+    [InverseProperty("Regions")]
+    public virtual Oblast Oblast { get; set; } = null!;
+
+    [InverseProperty("Region")]
+    public virtual ICollection<Organization> Organizations { get; set; } = new List<Organization>();
+
+    [InverseProperty("Region")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
 }
+

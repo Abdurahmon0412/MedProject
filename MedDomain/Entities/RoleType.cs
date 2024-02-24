@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 using MedDomain.Common;
 
 namespace MedDomain.Entities;
-/// <summary>
-/// enum_gender
-/// </summary>
-[Table("gender")]
-public class Gender : IEntity
+
+[Table("roletype")]
+public class Roletype : IEntity
 {
     [Key]
     [Column("id")]
@@ -38,6 +36,6 @@ public class Gender : IEntity
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }
 
-    [InverseProperty("Gender")]
-    public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
+    [InverseProperty("Roletype")]
+    public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
 }

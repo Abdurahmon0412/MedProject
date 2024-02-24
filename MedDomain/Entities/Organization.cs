@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 using MedDomain.Common;
 
 namespace MedDomain.Entities;
-/// <summary>
-/// enum_gender
-/// </summary>
-[Table("gender")]
-public class Gender : IEntity
+
+
+[Table("organization")]
+public class Organization : IEntity
 {
     [Key]
     [Column("id")]
@@ -26,6 +25,24 @@ public class Gender : IEntity
     [StringLength(100)]
     public string FullName { get; set; } = null!;
 
+    [Column("address")]
+    [StringLength(100)]
+    public string Address { get; set; } = null!;
+
+    [Column("pinfl")]
+    [StringLength(100)]
+    public string Pinfl { get; set; } = null!;
+
+    [Column("phone_number")]
+    [StringLength(100)]
+    public string PhoneNumber { get; set; } = null!;
+
+    [Column("oblast_id")]
+    public int OblastId { get; set; }
+
+    [Column("region_id")]
+    public int RegionId { get; set; }
+
     [Column("created_date", TypeName = "timestamp without time zone")]
     public DateTime CreatedDate { get; set; }
 
@@ -38,6 +55,14 @@ public class Gender : IEntity
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }
 
-    [InverseProperty("Gender")]
+    [ForeignKey("OblastId")]
+    [InverseProperty("Organizations")]
+    public virtual Oblast Oblast { get; set; } = null!;
+
+    [ForeignKey("RegionId")]
+    [InverseProperty("Organizations")]
+    public virtual Region Region { get; set; } = null!;
+
+    [InverseProperty("Organization")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
 }
