@@ -3,51 +3,47 @@ using MedPersistance.DataContext;
 using MedPersistance.Repositories.Base;
 using MedPersistance.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace MedPersistance.Repositories;
 
-public class GenderRepository : RepositoryBase<Gender>, IGenderRepository
+public class RoleRepository : RepositoryBase<Role>, IRoleRepository
 {
-    public GenderRepository(MContext dbContext) : base(dbContext)
-    {
+    public RoleRepository(MContext dbContext) : base(dbContext) { }
 
-    }
+    public IQueryable<Role> GetAllRoleAsync(bool trackChanges) =>
+             FindAll(trackChanges).OrderBy(c => c.Id);
 
-    public IQueryable<Gender> GetAllGenderAsync(bool trackChanges) =>
-            FindAll(trackChanges).OrderBy(c => c.Id);
-
-    public async Task<IEnumerable<Gender>> GetByIdsAsync(IEnumerable<long> ids, bool trackChanges) =>
+    public async Task<IEnumerable<Role>> GetByIdsAsync(IEnumerable<long> ids, bool trackChanges) =>
         await FindByCondition(x => ids.Contains(x.Id), trackChanges).ToListAsync();
 
-    public async Task<Gender> GetGenderAsync(long entityId, bool trackChanges) =>
+    public async Task<Role> GetRoleAsync(long entityId, bool trackChanges) =>
         await FindByConditionWithIncludes(c => c.Id.Equals(entityId), trackChanges).SingleOrDefaultAsync();
 
-    public Gender CreateGender(Gender entity)
+    public Role CreateRole(Role entity)
     {
         var updatedEntity = SetEntityProperties(entity);
         var createdEntity = Create(entity);
         return createdEntity;
     }
 
-    public IEnumerable<Gender> CreateGenders(IEnumerable<Gender> entities)
+    public IEnumerable<Role> CreateRoles(IEnumerable<Role> entities)
     {
         CreateRange(entities);
         return entities;
     }
 
-    public Gender UpdateGender(Gender entity)
+    public Role UpdateRole(Role entity)
     {
         var updatedEntity = Update(entity);
         return updatedEntity;
     }
 
-    public void DeleteGender(Gender entity)
+    public void DeleteRole(Role entity)
     {
         Delete(entity);
     }
 
-    private Gender SetEntityProperties(Gender entity)
+    private Role SetEntityProperties(Role entity)
     {
         return entity;
     }

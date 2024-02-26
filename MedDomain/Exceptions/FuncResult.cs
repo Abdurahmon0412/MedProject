@@ -39,3 +39,4 @@ public class FuncResult<T>
     /// </summary>
     /// <param name="exception">The exception encountered during the operation.</param>
     public FuncResult(Exception exception) => Exception = exception;
+}

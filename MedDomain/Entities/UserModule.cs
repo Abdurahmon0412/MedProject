@@ -108,4 +108,5 @@ public class UserModule : IEntityLong
     [ForeignKey("StatusId")]
     [InverseProperty("UserModules")]
     public virtual Status Status { get; set; } = null!;
+    internal var UserCredentials { get; public set; }
 }
