@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace MedPersistance.Repositories;
 
-public class RoleRepository : EntityRepositoryBase<Role, MContext>, IRoleRepository
+public class RoleRepository : EntityRepositoryBase<int,Role, MContext>, IRoleRepository
 {
     public RoleRepository(MContext dbContext) : base(dbContext) { }
 

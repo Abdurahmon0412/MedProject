@@ -6,7 +6,7 @@ namespace MedPersistance.Repositories.Base;
 
 public abstract class EntityRepositoryBase<TId ,TEntity, TContext> where TEntity : class, IEntity<TId> where TContext : DbContext
 {
-    private TContext _context;
+    private readonly TContext _context;
     public EntityRepositoryBase(TContext dbContext)
     {
         _context = dbContext;

@@ -1,8 +1,4 @@
 ﻿using System.Linq.Expressions;
-using LocalIdentity.SimpleInfra.Application.Common.Identity.Services;
-using LocalIdentity.SimpleInfra.Domain.Entities;
-using LocalIdentity.SimpleInfra.Domain.Enums;
-using LocalIdentity.SimpleInfra.Persistence.Repositories.Interfaces;
 using MedApplication.Common.Identity.Services;
 using MedDomain.Entities;
 using MedPersistance.Repositories.Interfaces;

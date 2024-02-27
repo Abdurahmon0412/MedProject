@@ -1,6 +1,6 @@
 namespace MedDomain.Common;
 
-public interface ISoftDeletedEntity : IEntity 
+public interface ISoftDeletedEntity : IEntity<int> 
 {
     /// <summary>
     /// Gets or sets a value indicating whether the entity is deleted.

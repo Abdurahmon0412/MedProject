@@ -1,4 +1,5 @@
-﻿using MedDomain.Entities;
+﻿using MedDomain.Common.Query;
+using MedDomain.Entities;
 
 namespace MedApplication.Common.Identity.Services;
 /// <summary>
@@ -25,4 +26,9 @@ public interface IRoleService
     /// <returns></returns>
     ValueTask<int> GetDefaultRoleId(CancellationToken cancellationToken = default);
 
+    ValueTask<IList<Role>> GetByFilterAsync(
+        FilterPagination filterOptions,
+        bool asNoTracking = false,
+        CancellationToken cancellationToken = default
+    );
 }
