@@ -10,7 +10,7 @@ using MedDomain.Common;
 namespace MedDomain.Entities;
 
 [Table("language")]
-public class Language : IEntity
+public class Language : IEntity<int>
 {
     [Key]
     [Column("id")]

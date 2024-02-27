@@ -10,7 +10,7 @@ using MedDomain.Common;
 namespace MedDomain.Entities;
 
 [Table("region")]
-public class Region : IEntity
+public class Region : IEntity<int>
 {
     [Key]
     [Column("id")]

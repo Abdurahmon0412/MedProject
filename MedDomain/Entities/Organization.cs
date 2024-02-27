@@ -6,7 +6,7 @@ namespace MedDomain.Entities;
 
 
 [Table("organization")]
-public class Organization : IEntity
+public class Organization : IEntity<int>
 {
     [Key]
     [Column("id")]

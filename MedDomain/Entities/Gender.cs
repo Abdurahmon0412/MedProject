@@ -12,7 +12,7 @@ namespace MedDomain.Entities;
 /// enum_gender
 /// </summary>
 [Table("gender")]
-public class Gender : IEntity
+public class Gender : IEntity<int>
 {
     [Key]
     [Column("id")]

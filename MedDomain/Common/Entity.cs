@@ -3,7 +3,7 @@ namespace MedDomain.Common;
 /// <summary>
 /// Represents the base class for entities in the system.
 /// </summary>
-public abstract class Entity : IEntity
+public abstract class Entity : IEntity<int>
 {
     /// <summary>
     /// Gets or sets the unique identifier for the entity.

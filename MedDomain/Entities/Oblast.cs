@@ -10,7 +10,7 @@ using MedDomain.Common;
 namespace MedDomain.Entities;
 
 [Table("oblast")]
-public class Oblast : IEntity
+public class Oblast : IEntity<int>
 {
     [Key]
     [Column("id")]

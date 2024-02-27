@@ -10,7 +10,7 @@ using MedDomain.Common;
 namespace MedDomain.Entities;
 
 [Table("role")]
-public class Role : IEntity
+public class Role : IEntity<int>
 {
     [Key]
     [Column("id")]

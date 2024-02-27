@@ -6,14 +6,14 @@
 public class SignUpDetails
 {
     /// <summary>
-    /// Gets or sets first name of the sign up details
+    /// Gets or sets full name of the sign up details
     /// </summary>
-    public string FirstName { get; set; } = default!;
+    public string FullName { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets last name of the sign up details
     /// </summary>
-    public string LastName { get; set; } = default!;
+    public string ShortName { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets age of the sign up details

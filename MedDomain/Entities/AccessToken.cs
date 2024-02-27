@@ -2,7 +2,7 @@
 
 namespace MedDomain.Entities;
 
-public class AccessToken : IEntity
+public class AccessToken : IEntity<int>
 {
 
     /// <summary>
