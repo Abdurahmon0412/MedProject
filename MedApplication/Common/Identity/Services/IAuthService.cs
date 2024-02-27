@@ -25,9 +25,9 @@ public interface IAuthService
     /// <param name="signInDetails">The login details containing the user's username and password.</param>
     /// <param name="cancellationToken">A token that can be used to cancel the login operation.</param>
     /// <returns>ValueTask<(AccessToken accessToken, RefreshToken refreshToken)></returns>
-    ValueTask<(AccessToken accessToken, RefreshToken refreshToken)> SignInAsync(
-        SignInDetails signInDetails, 
-        CancellationToken cancellationToken = default);
+    //ValueTask<(AccessToken accessToken, RefreshToken refreshToken)> SignInAsync(
+    //    SignInDetails signInDetails, 
+    //    CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously grants a specified role to a user.
@@ -36,7 +36,7 @@ public interface IAuthService
     /// <param name="roleType">The type of role to grant (e.g., "Admin", "User", "Moderator", etc.).</param>
     /// <param name="cancellationToken">A token that can be used to cancel the operation.</param>
     /// <returns>A ValueTask<bool> indicating whether the role was granted successfully.</returns>
-    ValueTask<bool> GrandRoleAsync(long userId, string roleType, CancellationToken cancellationToken = default);
+    //ValueTask<bool> GrandRoleAsync(long userId, string roleType, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Asynchronously revokes a specified role from a user.
@@ -45,7 +45,7 @@ public interface IAuthService
     /// <param name="roleType">The type of role to revoke (e.g., "Admin", "User", "Moderator", etc.).</param>
     /// <param name="cancellationToken">A token that can be used to cancel the operation.</param>
     /// <returns></returns>
-    ValueTask<bool> RevokeRoleAsync(long userId, string roleType, CancellationToken cancellationToken = default);
+    //ValueTask<bool> RevokeRoleAsync(long userId, string roleType, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Checks given refresh token and access token, then generates new access token for user
@@ -53,7 +53,7 @@ public interface IAuthService
     /// <param name="refreshTokenValue">The unique token value of the refresh token to get</param>
     /// <param name="cancellationToken">Cancellation token to stop the operation if needed</param>
     /// <returns></returns>
-    ValueTask<AccessToken> RefreshTokenAsync(
-        string refreshTokenValue, 
-        CancellationToken cancellationToken = default);
+    //ValueTask<AccessToken> RefreshTokenAsync(
+        //string refreshTokenValue, 
+        //CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedDomain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedPersistance.DataContext;
 

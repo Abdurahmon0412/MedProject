@@ -10,3 +10,16 @@ CREATE TABLE IF NOT EXISTS role
     modified_date              timestamp without time zone,
     modified_user_id           integer
 )
+
+CREATE TABLE IF NOT EXISTS verification_code
+(
+    id                         serial PRIMARY KEY,
+
+    name                       varchar(100) NOT NULL,
+    user_id                    integer NOT NULL REFERENCES "user_module",
+    
+    created_date               timestamp without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_user_id            integer,
+    modified_date              timestamp without time zone,
+    modified_user_id           integer
+)

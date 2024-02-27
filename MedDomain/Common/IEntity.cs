@@ -1,6 +1,6 @@
 namespace MedDomain.Common;
 
-public interface IEntity
+public interface IEntity<TId>
 {
     /// <summary>
     /// Gets or sets the unique identifier of the entity.
@@ -8,5 +8,5 @@ public interface IEntity
     /// <value>
     /// The unique identifier of the entity.
     /// </value>
-    public int Id { get; set; } 
+    public TId Id { get; set; } 
 }

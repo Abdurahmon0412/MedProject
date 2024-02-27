@@ -1,14 +1,16 @@
-﻿namespace MedDomain.Entities;
+﻿using MedDomain.Common;
+
+namespace MedDomain.Entities;
 
 /// <summary>
 /// Represents refresh token
 /// </summary>
-public class RefreshToken
+public class RefreshToken 
 {
     /// <summary>
     /// Gets or sets the unique identifier of the associated user.
     /// </summary>
-    public Guid UserId { get; set; }
+    public long UserId { get; set; }
 
     /// <summary>
     /// Gets or sets the refresh token string.

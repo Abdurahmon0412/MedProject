@@ -13,8 +13,8 @@ public interface IAccountService
     /// <param name="asNoTracking">Indicates whether to disable change tracking. Default is false.</param>
     /// <param name="cancellationToken">Cancellation token for asynchronous operations.</param>
     /// <returns>A <see cref="ValueTask"/> containing the retrieved user or null if not found.</returns>
-    ValueTask<UserModule?> GetUserModuleByEmailAddressAsync(string emailAddress, bool asNoTracking = false,
-        CancellationToken cancellationToken = default);
+    //ValueTask<UserModule?> GetUserModuleByEmailAddressAsync(string emailAddress, bool asNoTracking = false,
+      //  CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Creates a new user.
@@ -30,5 +30,5 @@ public interface IAccountService
     /// <param name="code">The verification code associated with the user.</param>
     /// <param name="cancellationToken">Cancellation token for asynchronous operations.</param>
     /// <returns>True if the user is successfully verified; otherwise, false.</returns>
-    ValueTask<bool> VerifyUserModuleAsync(string code, CancellationToken cancellationToken = default);
+    //ValueTask<bool> VerifyUserModuleAsync(string code, CancellationToken cancellationToken = default);
 }

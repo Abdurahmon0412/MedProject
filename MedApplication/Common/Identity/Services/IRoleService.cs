@@ -18,4 +18,11 @@ public interface IRoleService
         bool asNoTracking = false,
         CancellationToken cancellationToken = default
     );
+    /// <summary>
+    /// Get by default Role by Id 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    ValueTask<int> GetDefaultRoleId(CancellationToken cancellationToken = default);
+
 }

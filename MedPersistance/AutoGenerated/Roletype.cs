@@ -4,35 +4,35 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedPersistance;
-
-[Table("roletype")]
-public partial class Roletype
+namespace MedPersistance
 {
-    [Key]
-    [Column("id")]
-    public int Id { get; set; }
+    [Table("roletype")]
+    public partial class Roletype
+    {
+        public Roletype()
+        {
+            Roles = new HashSet<Role>();
+        }
 
-    [Column("short_name")]
-    [StringLength(100)]
-    public string ShortName { get; set; } = null!;
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("short_name")]
+        [StringLength(100)]
+        public string ShortName { get; set; } = null!;
+        [Column("full_name")]
+        [StringLength(100)]
+        public string FullName { get; set; } = null!;
+        [Column("created_date", TypeName = "timestamp without time zone")]
+        public DateTime CreatedDate { get; set; }
+        [Column("created_user_id")]
+        public int? CreatedUserId { get; set; }
+        [Column("modified_date", TypeName = "timestamp without time zone")]
+        public DateTime? ModifiedDate { get; set; }
+        [Column("modified_user_id")]
+        public int? ModifiedUserId { get; set; }
 
-    [Column("full_name")]
-    [StringLength(100)]
-    public string FullName { get; set; } = null!;
-
-    [Column("created_date", TypeName = "timestamp without time zone")]
-    public DateTime CreatedDate { get; set; }
-
-    [Column("created_user_id")]
-    public int? CreatedUserId { get; set; }
-
-    [Column("modified_date", TypeName = "timestamp without time zone")]
-    public DateTime? ModifiedDate { get; set; }
-
-    [Column("modified_user_id")]
-    public int? ModifiedUserId { get; set; }
-
-    [InverseProperty("Roletype")]
-    public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
+        [InverseProperty(nameof(Role.Roletype))]
+        public virtual ICollection<Role> Roles { get; set; }
+    }
 }

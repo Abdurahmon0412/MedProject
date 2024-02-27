@@ -2,49 +2,32 @@
 using MedPersistance.DataContext;
 using MedPersistance.Repositories.Base;
 using MedPersistance.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
-
+using System.Linq.Expressions;
 namespace MedPersistance.Repositories;
 
-public class UserModuleRepository : RepositoryBase<UserModule>, IUserModuleRepository
+public class UserModuleRepository : EntityRepositoryBase<long,UserModule, MContext>, IUserModuleRepository
 {
+
     public UserModuleRepository(MContext dbContext) : base(dbContext) { }
 
-    public IQueryable<UserModule> GetAllUserModuleAsync(bool trackChanges) =>
-            FindAll(trackChanges).OrderBy(c => c.Id);
+    public IQueryable<UserModule> Get(Expression<Func<UserModule, bool>>? predicate = default, bool asNoTracking = false) => base.Get(predicate, asNoTracking);
 
-    public async Task<IEnumerable<UserModule>> GetByIdsAsync(IEnumerable<long> ids, bool trackChanges) =>
-        await FindByCondition(x => ids.Contains(x.Id), trackChanges).ToListAsync();
+    public new ValueTask<UserModule?> GetByIdAsync(long userId, bool asNoTracking = false, CancellationToken cancellationToken = default) =>
+        base.GetByIdAsync(userId, asNoTracking, cancellationToken);
 
-    public async Task<UserModule> GetUserModuleAsync(long entityId, bool trackChanges) =>
-        await FindByConditionWithIncludes(c => c.Id.Equals(entityId), trackChanges).SingleOrDefaultAsync();
+    public new ValueTask<UserModule> CreateAsync(UserModule user, bool saveChanges = true, CancellationToken cancellationToken = default) =>
+        base.CreateAsync(user, saveChanges, cancellationToken);
 
-    public UserModule CreateUserModule(UserModule entity)
+    public new ValueTask<UserModule> UpdateAsync(UserModule user, bool saveChanges = true, CancellationToken cancellationToken = default) =>
+        base.UpdateAsync(user, saveChanges, cancellationToken);
+
+    public ValueTask<UserModule> DeleteByIdAsync(long userId, CancellationToken cancellationToken = default)
     {
-        var updatedEntity = SetEntityProperties(entity);
-        var createdEntity = Create(entity);
-        return createdEntity;
+        return base.DeleteByIdAsync(userId, cancellationToken: cancellationToken);
     }
 
-    public IEnumerable<UserModule> CreateUserModules(IEnumerable<UserModule> entities)
+    public ValueTask<UserModule> DeleteAsync(UserModule user, CancellationToken cancellationToken = default)
     {
-        CreateRange(entities);
-        return entities;
-    }
-
-    public UserModule UpdateUserModule(UserModule entity)
-    {
-        var updatedEntity = Update(entity);
-        return updatedEntity;
-    }
-
-    public void DeleteUserModule(UserModule entity)
-    {
-        Delete(entity);
-    }
-
-    private UserModule SetEntityProperties(UserModule entity)
-    {
-        return entity;
+        return base.DeleteAsync(user, cancellationToken: cancellationToken);
     }
 }
