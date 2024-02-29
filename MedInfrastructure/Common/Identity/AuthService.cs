@@ -4,11 +4,11 @@ using MedApplication.Common.Identity.Services;
 using MedDomain.Entities;
 
 
-namespace LocalIdentity.SimpleInfra.Infrastructure.Common.Identity.Services;
+namespace MedInfrastructure.Common.Identity;
 
-public class AutService : IAuthService
+public class AuthService : IAuthService
 {
-    public AutService(IMapper mapper,
+    public AuthService(IMapper mapper,
     IPasswordGeneratorService passwordGeneratorService,
     IPasswordHasherService passwordHasherService,
     IAccountService accountAggregatorService,

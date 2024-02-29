@@ -4,7 +4,7 @@ using MedDomain.Entities;
 using MedPersistance.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace LocalIdentity.SimpleInfra.Infrastructure.Common.Identity.Services;
+namespace MedInfrastructure.Common.Identity;
 
 public class UserModuleService : IUserModuleService
 {

@@ -8,7 +8,7 @@ using MedDomain.Extentions;
 using MedInfrastructure.Common.Identity.Settings;
 using Microsoft.Extensions.Options;
 
-namespace LocalIdentity.SimpleInfra.Infrastructure.Common.Identity.Services;
+namespace MedInfrastructure.Common.Identity;
 
 public class PasswordGeneratorService : IPasswordGeneratorService
 {

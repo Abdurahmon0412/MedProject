@@ -1,7 +1,7 @@
 ﻿using MedApplication.Common.Identity.Services;
 using BC = BCrypt.Net.BCrypt;
 
-namespace LocalIdentity.SimpleInfra.Infrastructure.Common.Identity.Services;
+namespace MedInfrastructure.Common.Identity;
 
 public class PasswordHasherService : IPasswordHasherService
 {

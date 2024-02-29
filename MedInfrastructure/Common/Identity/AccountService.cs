@@ -4,7 +4,7 @@ using MedDomain.Constants;
 using MedDomain.Entities;
 using MedDomain.Enums;
 
-namespace LocalIdentity.SimpleInfra.Infrastructure.Common.Identity.Services;
+namespace MedInfrastructure.Common.Identity;
 
 public class AccountService : IAccountService
 {
