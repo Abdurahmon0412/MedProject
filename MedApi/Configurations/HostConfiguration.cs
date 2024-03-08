@@ -1,6 +1,4 @@
-﻿using LocalIdentity.SimpleInfra.Api.Configurations;
-
-namespace MedApi.Configurations
+﻿namespace MedApi.Configurations
 {
     public static partial class HostConfiguration
     {

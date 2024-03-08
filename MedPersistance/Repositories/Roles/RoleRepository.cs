@@ -1,12 +1,11 @@
 ﻿using MedDomain.Entities;
 using MedPersistance.DataContext;
 using MedPersistance.Repositories.Base;
-using MedPersistance.Repositories.Interfaces;
 using System.Linq.Expressions;
 
-namespace MedPersistance.Repositories;
+namespace MedPersistance.Repositories.Roles;
 
-public class RoleRepository : EntityRepositoryBase<int,Role, MContext>, IRoleRepository
+public class RoleRepository : EntityRepositoryBase<int, Role, MContext>, IRoleRepository
 {
     public RoleRepository(MContext dbContext) : base(dbContext) { }
 

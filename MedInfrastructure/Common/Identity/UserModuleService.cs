@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
 using MedApplication.Common.Identity.Services;
 using MedDomain.Entities;
-using MedPersistance.Repositories.Interfaces;
+using MedPersistance.Repositories.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedInfrastructure.Common.Identity;

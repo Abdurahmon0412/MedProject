@@ -1,5 +1,5 @@
 ﻿using MedApplication.Common.Notification.Models;
-using MedDomain.FuncResult;
+using MedDomain.Exceptions;
 
 namespace MedApplication.Common.Notification.Services;
 

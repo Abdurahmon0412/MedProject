@@ -2,14 +2,13 @@
 using MedApplication.Common.Identity.Services;
 using MedInfrastructure.Common.Notifications;
 using MedInfrastructure.Common.Settings;
-using MedPersistance.Repositories.Interfaces;
-using MedPersistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using MedPersistance.DataContext;
 using MedInfrastructure.Common.Identity;
+using MedPersistance.Repositories.User;
 
-namespace LocalIdentity.SimpleInfra.Api.Configurations;
+namespace MedApi.Configurations;
 
 public static partial class HostConfiguration
 {
@@ -103,7 +102,7 @@ public static partial class HostConfiguration
         return builder;
     }
 
-    public static  ValueTask<WebApplication> SeedDataAsync(this WebApplication app)
+    public static ValueTask<WebApplication> SeedDataAsync(this WebApplication app)
     {
         var serviceScope = app.Services.CreateScope();
         //await serviceScope.ServiceProvider.InitializeSeedAsync();

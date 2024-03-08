@@ -1,7 +1,7 @@
 ﻿using MedDomain.Entities;
 using System.Linq.Expressions;
 
-namespace MedPersistance.Repositories.Interfaces;
+namespace MedPersistance.Repositories.User;
 
 public interface IUserModuleRepository
 {

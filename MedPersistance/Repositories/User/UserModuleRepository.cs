@@ -1,11 +1,10 @@
 ﻿using MedDomain.Entities;
 using MedPersistance.DataContext;
 using MedPersistance.Repositories.Base;
-using MedPersistance.Repositories.Interfaces;
 using System.Linq.Expressions;
-namespace MedPersistance.Repositories;
+namespace MedPersistance.Repositories.User;
 
-public class UserModuleRepository : EntityRepositoryBase<long,UserModule, MContext>, IUserModuleRepository
+public class UserModuleRepository : EntityRepositoryBase<long, UserModule, MContext>, IUserModuleRepository
 {
 
     public UserModuleRepository(MContext dbContext) : base(dbContext) { }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedPersistance.Repositories.Interfaces
+namespace MedPersistance.Repositories.Auth
 {
-    public interface IAccessTokenRepository
+    public interface IRefreshTokenRepository
     {
     }
 }

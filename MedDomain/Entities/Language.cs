@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MedDomain.Common;
 
 namespace MedDomain.Entities;
@@ -12,6 +7,10 @@ namespace MedDomain.Entities;
 [Table("language")]
 public class Language : IEntity<int>
 {
+    public Language()
+    {
+        
+    }
     [Key]
     [Column("id")]
     public int Id { get; set; }
@@ -39,4 +38,3 @@ public class Language : IEntity<int>
     [InverseProperty("Language")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
 }
-

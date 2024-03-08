@@ -1,6 +1,5 @@
 ﻿using MedApplication.Common.Notification.Models;
 using MedDomain.Enums;
-using MedDomain.FuncResult;
 using MedInfrastructure.Common.Settings;
 using Microsoft.Extensions.Options;
 using System.Net.Mail;
@@ -8,6 +7,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Text;
 using MedApplication.Common.Identity.Services;
+using MedDomain.Exceptions;
 
 namespace MedInfrastructure.Common.Notifications;
 
