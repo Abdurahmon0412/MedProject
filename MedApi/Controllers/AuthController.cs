@@ -21,9 +21,11 @@ public class AuthController : ControllerBase
     public async ValueTask<IActionResult> SignUp([FromBody] SignUpDetails signUpDetails, CancellationToken cancellationToken)
     {
         var result = await _authService.SignUpAsync(signUpDetails, cancellationToken);
-        return result ? Ok() : BadRequest();
+        return result != null? Ok() : BadRequest();
     }
     #endregion
+
+
 
     #region Roles
 

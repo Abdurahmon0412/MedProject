@@ -14,4 +14,8 @@
     <ProjectReference Include="..\MedDomain\MedDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Identity\Validators\" />
+  </ItemGroup>
+
 </Project>

@@ -12,14 +12,11 @@ namespace MedInfrastructure.Common.Identity;
 
 public class PasswordGeneratorService : IPasswordGeneratorService
 {
-    public PasswordGeneratorService(
-    IOptions<PasswordValidationSettings> passwordValidationSettings,
-    IValidator<CredentialDetails> credentialDetailsValidator)
+    public PasswordGeneratorService(IOptions<PasswordValidationSettings> passwordValidationSettings)
     {
         _passwordValidationSettings = passwordValidationSettings.Value;
-        _credentialDetailsValidator = credentialDetailsValidator;
     }
-    private IValidator<CredentialDetails> _credentialDetailsValidator { get; set; }
+
     private readonly PasswordValidationSettings _passwordValidationSettings;
     private readonly Random _random = new();
 
@@ -59,9 +56,9 @@ public class PasswordGeneratorService : IPasswordGeneratorService
             }
         };
 
-        var validationResult = _credentialDetailsValidator.Validate(validationContext);
-        if (!validationResult.IsValid)
-            throw new ValidationException(validationResult.Errors);
+        //var validationResult = _credentialDetailsValidator.Validate(validationContext);
+        //if (!validationResult.IsValid)
+        //    throw new ValidationException(validationResult.Errors);
 
         return password;
     }

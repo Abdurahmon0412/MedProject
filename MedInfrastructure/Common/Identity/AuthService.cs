@@ -2,6 +2,7 @@
 using MedApplication.Common.Identity.Models;
 using MedApplication.Common.Identity.Services;
 using MedDomain.Entities;
+using System.Security.Authentication;
 
 
 namespace MedInfrastructure.Common.Identity;
@@ -13,8 +14,7 @@ public class AuthService : IAuthService
     IPasswordHasherService passwordHasherService,
     IAccountService accountAggregatorService,
     // IUserSignInDetailsService userSignInDetailsService,
-    // IAccessTokenGeneratorService accessTokenGeneratorService,
-    // IAccessTokenService accessTokenService,
+    ITokenGeneratorService accessTokenGeneratorService,
     IUserModuleService userService,
     IRoleService roleService)
     {
@@ -25,15 +25,17 @@ public class AuthService : IAuthService
         _mapper = mapper;
         _userService = userService;
         _roleService = roleService;
+        _accessTokenGeneratorService = accessTokenGeneratorService;
     }
 
+    private readonly ITokenGeneratorService _accessTokenGeneratorService;
     private readonly IMapper _mapper;
     private readonly IPasswordGeneratorService _passwordGeneratorService;
     private readonly IPasswordHasherService _passwordHasherService;
     private readonly IAccountService _accountService;
     private readonly IRoleService _roleService;
     private readonly IUserModuleService _userService;
-    public async ValueTask<bool> SignUpAsync(SignUpDetails signUpDetails, CancellationToken cancellationToken = default)
+    public async ValueTask<string> SignUpAsync(SignUpDetails signUpDetails, CancellationToken cancellationToken = default)
     {
         var foundUser = await _userService.GetByEmailAddressAsync(signUpDetails.EmailAddress, cancellationToken: cancellationToken);
 
@@ -48,32 +50,36 @@ public class AuthService : IAuthService
 
         user.RoleId = await _roleService.GetDefaultRoleId(cancellationToken);
         user.PasswordHash = _passwordHasherService.HashPassword(password);
+        await _accountService.CreateUserModuleAsync(foundUser, cancellationToken);
 
-        // Create user
-        var createdUser = await _accountService.CreateUserModuleAsync(user, cancellationToken);
-        return true;
+        return  _accessTokenGeneratorService.GetToken(foundUser);
     }
-    
+
     public async ValueTask<AccessToken> SignInAsync(SignInDetails signInDetails, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
 
-        // var foundUser = await userService.GetByEmailAddressAsync(signInDetails.EmailAddress,  cancellationToken: cancellationToken);
-        //
-        // if (foundUser is null || !passwordHasherService.HashPassword(foundUser.PasswordHash).Equals(foundUser.PasswordHash))
-        //     throw new AuthenticationException("Invalid email address or password.");
-        //
-        // // Validate login location
-        // var locationValidationResult = await userSignInDetailsService.ValidateSignInLocation(cancellationToken);
-        //
+        var foundUser = await _userService.GetByEmailAddressAsync(signInDetails.EmailAddress, cancellationToken: cancellationToken);
+
+        if (foundUser is null || !_passwordHasherService.HashPassword(foundUser.PasswordHash).Equals(foundUser.PasswordHash))
+            throw new AuthenticationException("Invalid email address or password.");
+
+        await _accountService.CreateUserModuleAsync(foundUser, cancellationToken);
+        // Validate login location
+        //var locationValidationResult = await userSignInDetailsService.ValidateSignInLocation(cancellationToken);
+
         // // Notify user about changed location
         //
         // // Record login info
-        // await userSignInDetailsService.RecordSignInAsync(false, cancellationToken);
+        //await userSignInDetailsService.RecordSignInAsync(false, cancellationToken);
         //
         // // Generate access token and save it
-        // var tokenValue = accessTokenGeneratorService.GetToken(foundUser);
-        // return await accessTokenService.CreateAsync(foundUser.Id, tokenValue.Token, tokenValue.ExpiryTime, true, cancellationToken);
+        //await accessTokenService.CreateAsync(foundUser.Id, tokenValue.Token, tokenValue.ExpiryTime, true, cancellationToken);
+        var tokenValue = _accessTokenGeneratorService.GetToken(foundUser);
+        return new AccessToken()
+        {
+            UserId = foundUser.Id,
+            Token = tokenValue,
+        };
     }
 
     public ValueTask<bool> GrandRoleAsync(long userId, string roleType, CancellationToken cancellationToken = default)

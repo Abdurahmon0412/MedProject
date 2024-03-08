@@ -15,7 +15,7 @@ public interface IAuthService
     /// <param name="signUpDetails">The registration information for the new user</param>
     /// <param name="cancellationToken">A token that can be used to cancel the registration operation</param>
     /// <returns>A ValueTask<bool> that indicates whether the registration was successful.</returns>
-    ValueTask<bool> SignUpAsync(
+    ValueTask<string> SignUpAsync(
         SignUpDetails signUpDetails, 
         CancellationToken cancellationToken = default);
 

@@ -2,7 +2,7 @@
 
 namespace MedDomain.Entities;
 
-public class AccessToken : IEntity<int>
+public class AccessToken 
 {
 
     /// <summary>
@@ -22,16 +22,15 @@ public class AccessToken : IEntity<int>
     /// <param name="isRevoked">A flag indicating whether the access token is revoked.</param>
     public AccessToken(int id, long userId, string token, DateTimeOffset expiryTime, bool isRevoked)
     {
-        Id = id;
         UserId = userId;
         Token = token;
-        ExpiryTime = expiryTime;
-        IsRevoked = isRevoked;
+        //ExpiryTime = expiryTime;
+        //IsRevoked = isRevoked;
     }
     /// <summary>
     /// Access token Id
     /// </summary>
-    public int Id { get; set; }
+    //public int Id { get; set; }
 
     /// <summary>
     /// Gets or sets the unique identifier of the associated user.
@@ -49,10 +48,10 @@ public class AccessToken : IEntity<int>
     /// <summary>
     /// Gets or sets the expiration time of the access token.
     /// </summary>
-    public DateTimeOffset ExpiryTime { get; set; }
+    //public DateTimeOffset ExpiryTime { get; set; }
 
     /// <summary>
     /// Gets or sets a flag indicating whether the access token is revoked.
     /// </summary>
-    public bool IsRevoked { get; set; }
+    //public bool IsRevoked { get; set; }
 }

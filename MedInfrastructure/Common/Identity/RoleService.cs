@@ -2,7 +2,7 @@
 using MedDomain.Common.Query;
 using MedDomain.Entities;
 using MedPersistance.Extentions;
-using MedPersistance.Repositories.Role;
+using MedPersistance.Repositories.Roles;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedInfrastructure.Common.Identity;

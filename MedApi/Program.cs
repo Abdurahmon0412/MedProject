@@ -1,4 +1,3 @@
-using LocalIdentity.SimpleInfra.Api.Configurations;
 using MedApi.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);

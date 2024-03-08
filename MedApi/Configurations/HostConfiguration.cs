@@ -5,7 +5,7 @@
         public static ValueTask<WebApplicationBuilder> ConfigureAsync(this WebApplicationBuilder builder)
         {
             builder
-                .AddValidators()
+                //.AddValidators()
                 .AddMappers()
                 .AddNotificationInfrastructure()
                 .AddVerificationInfrastructure()
@@ -19,7 +19,9 @@
         {
             await app.SeedDataAsync();
 
-            app.UseExposers();
+            app
+                .UseExposers()
+                .UseIdentityInfrastructure();
 
             return app;
         }

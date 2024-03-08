@@ -7,6 +7,7 @@ using System.Reflection;
 using MedPersistance.DataContext;
 using MedInfrastructure.Common.Identity;
 using MedPersistance.Repositories.User;
+using MedPersistance.Repositories.Roles;
 
 namespace MedApi.Configurations;
 
@@ -20,16 +21,16 @@ public static partial class HostConfiguration
         Assemblies.Add(Assembly.GetExecutingAssembly());
     }
 
-    public static WebApplicationBuilder AddValidators(this WebApplicationBuilder builder)
-    {
-        // register configurations 
-        builder.Services.Configure<ValidationSettings>(builder.Configuration.GetSection(nameof(ValidationSettings)));
+    //public static WebApplicationBuilder AddValidators(this WebApplicationBuilder builder)
+    //{
+    //    // register configurations 
+    //    builder.Services.Configure<ValidationSettings>(builder.Configuration.GetSection(nameof(ValidationSettings)));
 
-        // register fluent validation
-        //builder.Services.AddValidatorsForAssemblies(Assemblies);
+    //    // register fluent validation
+    //    //builder.Services.AddValidatorsForAssemblies(Assemblies);
 
-        return builder;
-    }
+    //    return builder;
+    //}
 
     public static WebApplicationBuilder AddMappers(this WebApplicationBuilder builder)
     {
@@ -68,15 +69,20 @@ public static partial class HostConfiguration
             .AddScoped<IRoleRepository, RoleRepository>();
 
         // register helper foundation services
-        builder.Services.AddTransient<IPasswordHasherService, PasswordHasherService>()
+        builder.Services
+            .AddTransient<IPasswordHasherService, PasswordHasherService>()
             .AddTransient<IPasswordGeneratorService, PasswordGeneratorService>();
 
         // register foundation data access services
-        builder.Services.AddScoped<IUserModuleService, UserModuleService>().AddScoped<IRoleService, RoleService>();
+        builder.Services
+            .AddScoped<IUserModuleService, UserModuleService>()
+            .AddScoped<IRoleService, RoleService>();
 
         // register other higher services
-        builder.Services.AddScoped<IAccountService, AccountService>()
-            .AddScoped<IAuthService, AuthService>();
+        builder.Services
+            .AddScoped<IAccountService, AccountService>()
+            .AddScoped<IAuthService, AuthService>()
+            .AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
         return builder;
     }
@@ -97,7 +103,6 @@ public static partial class HostConfiguration
     {
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         builder.Services.AddControllers();
-        //builder.Services.AddFluentValidationAutoValidation();
 
         return builder;
     }
@@ -113,6 +118,14 @@ public static partial class HostConfiguration
     public static WebApplication UseExposers(this WebApplication app)
     {
         app.MapControllers();
+
+        return app;
+    }
+
+    public static WebApplication UseIdentityInfrastructure(this WebApplication app)
+    {
+        app.UseAuthorization();
+        app.UseAuthentication();
 
         return app;
     }
