@@ -8,6 +8,14 @@ using MedPersistance.DataContext;
 using MedInfrastructure.Common.Identity;
 using MedPersistance.Repositories.User;
 using MedPersistance.Repositories.Roles;
+using MedInfrastructure.Common.EntityServices;
+using MedApplication.Common.EntityServices;
+using MedPersistance.Repositories.OrganizationRepository;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using MedApplication.Common.Settings;
+using System.Text;
 
 namespace MedApi.Configurations;
 
@@ -65,8 +73,10 @@ public static partial class HostConfiguration
         );
 
         // register repositories
-        builder.Services.AddScoped<IUserModuleRepository, UserModuleRepository>()
-            .AddScoped<IRoleRepository, RoleRepository>();
+        builder.Services
+            .AddScoped<IUserModuleRepository, UserModuleRepository>()
+            .AddScoped<IRoleRepository, RoleRepository>()
+            .AddScoped<IOrganizationRepository, OrganizationRepository>();
 
         // register helper foundation services
         builder.Services
@@ -76,7 +86,8 @@ public static partial class HostConfiguration
         // register foundation data access services
         builder.Services
             .AddScoped<IUserModuleService, UserModuleService>()
-            .AddScoped<IRoleService, RoleService>();
+            .AddScoped<IRoleService, RoleService>()
+            .AddScoped<IOrganizationService, OrganizationService>();
 
         // register other higher services
         builder.Services
@@ -101,8 +112,62 @@ public static partial class HostConfiguration
 
     public static WebApplicationBuilder AddDevTools(this WebApplicationBuilder builder)
     {
-        builder.Services.AddSwaggerGen();
-        builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection(nameof(JwtSettings)));
+
+        builder.Services.AddSwaggerGen(cw =>
+        {
+            cw.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "JwtToken_Auth_API",
+                Version = "v1"
+            });
+            cw.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description = "Enter JWT Token",
+            });
+            cw.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[]{ }
+                }
+            });
+            });
+
+
+        var jwtSettings = new JwtSettings();
+        builder.Configuration.GetSection(nameof(jwtSettings)).Bind(jwtSettings);
+
+        builder.Services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = jwtSettings.ValidateIssuer,
+                    ValidIssuer = jwtSettings.ValidIssuer,
+                    ValidateAudience = jwtSettings.ValidateAudience,
+                    ValidAudience = jwtSettings.ValidAudience,
+                    ValidateLifetime = jwtSettings.ValidateLifetime,
+                    ValidateIssuerSigningKey = jwtSettings.ValidateIssuerSigningKey,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
+                };
+            });
 
         return builder;
     }

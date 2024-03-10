@@ -24,20 +24,20 @@ public class AccountService : IAccountService
         var createdUser = await _userModuleService.CreateAsync(user, cancellationToken: cancellationToken);
 
         // send welcome email
-        var systemUser = await _userModuleService.GetSystemUserAsync(cancellationToken: cancellationToken);
-        await _emailOrchestrationService.SendAsync(
-            new EmailNotificationRequest
-            {
-                SenderUserId = systemUser.Id,
-                ReceiverUserId = createdUser.Id,
-                TemplateType = NotificationTemplateType.WelcomeNotification,
-                Variables = new Dictionary<string, string>
-                {
-                    { NotificationTemplateConstants.UserNamePlaceholder, createdUser.FullName }
-                }
-            },
-            cancellationToken
-        );
+        //var systemUser = await _userModuleService.GetSystemUserAsync(cancellationToken: cancellationToken);
+        //await _emailOrchestrationService.SendAsync(
+        //    new EmailNotificationRequest
+        //    {
+        //        SenderUserId = systemUser.Id,
+        //        ReceiverUserId = createdUser.Id,
+        //        TemplateType = NotificationTemplateType.WelcomeNotification,
+        //        Variables = new Dictionary<string, string>
+        //        {
+        //            { NotificationTemplateConstants.UserNamePlaceholder, createdUser.FullName }
+        //        }
+        //    },
+        //    cancellationToken
+        //);
 
         // send verification email
         var rd = new Random();
@@ -50,7 +50,7 @@ public class AccountService : IAccountService
         await _emailOrchestrationService.SendAsync(
             new EmailNotificationRequest
             {
-                SenderUserId = systemUser.Id,
+                //SenderUserId = systemUser.Id,
                 ReceiverUserId = createdUser.Id,
                 TemplateType = NotificationTemplateType.EmailAddressVerificationNotification,
                 Variables = new Dictionary<string, string>

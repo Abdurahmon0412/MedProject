@@ -30,7 +30,7 @@ public class TokenGeneratorService : ITokenGeneratorService
     {
         var claims = GetClaims(user);
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(SecretKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         return new JwtSecurityToken(

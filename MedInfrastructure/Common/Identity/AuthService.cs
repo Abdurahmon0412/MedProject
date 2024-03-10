@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MedApplication.Common.EntityServices;
 using MedApplication.Common.Identity.Models;
 using MedApplication.Common.Identity.Services;
 using MedDomain.Entities;
@@ -16,7 +17,8 @@ public class AuthService : IAuthService
     // IUserSignInDetailsService userSignInDetailsService,
     ITokenGeneratorService accessTokenGeneratorService,
     IUserModuleService userService,
-    IRoleService roleService)
+    IRoleService roleService,
+    IOrganizationService organizationService)
     {
         _accountService = accountAggregatorService;
         _roleService = roleService;
@@ -26,8 +28,10 @@ public class AuthService : IAuthService
         _userService = userService;
         _roleService = roleService;
         _accessTokenGeneratorService = accessTokenGeneratorService;
+        _organizationService = organizationService;
     }
 
+    private readonly IOrganizationService _organizationService;
     private readonly ITokenGeneratorService _accessTokenGeneratorService;
     private readonly IMapper _mapper;
     private readonly IPasswordGeneratorService _passwordGeneratorService;
@@ -49,10 +53,17 @@ public class AuthService : IAuthService
             : _passwordGeneratorService.GetValidatedPassword(signUpDetails.Password!, user);
 
         user.RoleId = await _roleService.GetDefaultRoleId(cancellationToken);
+        var org = await _organizationService.GetByIdAsync(signUpDetails.OrganizationId, cancellationToken: cancellationToken);
+        user.Role = await _roleService.GetByIdAsync(user.RoleId, cancellationToken: cancellationToken);
+        user.OrganizationId = org.Id;
+        user.RegionId = org.RegionId;
+        user.OblastId = org.OblastId;
+        user.LanguageId = 1;
+        user.StatusId = 1;
         user.PasswordHash = _passwordHasherService.HashPassword(password);
-        await _accountService.CreateUserModuleAsync(foundUser, cancellationToken);
+        await _accountService.CreateUserModuleAsync(user, cancellationToken);
 
-        return  _accessTokenGeneratorService.GetToken(foundUser);
+        return  _accessTokenGeneratorService.GetToken(user);
     }
 
     public async ValueTask<AccessToken> SignInAsync(SignInDetails signInDetails, CancellationToken cancellationToken = default)

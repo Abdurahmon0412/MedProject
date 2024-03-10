@@ -54,7 +54,7 @@ public abstract class EntityRepositoryBase<TId ,TEntity, TContext> where TEntity
 
     protected async ValueTask<TEntity> CreateAsync(TEntity entity, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
+        await _context.Set<TEntity>().AddAsync(entity, cancellationToken);
 
         if (saveChanges)
             await DbContext.SaveChangesAsync(cancellationToken);

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS region
+﻿CREATE TABLE IF NOT EXISTS region
 (
     id                         serial PRIMARY KEY,
 
@@ -11,3 +11,57 @@ CREATE TABLE IF NOT EXISTS region
     modified_date              timestamp without time zone,
     modified_user_id           integer
 )
+
+INSERT INTO region (id, short_name, full_name, oblast_id, created_user_id)
+VALUES 
+    (1, 'Andijon', 'Andijon shahri', 1, 1),
+    (2, 'Asaka', 'Asaka tumani', 1, 1),
+    (3, 'Oltinkoʻl', 'Oltinkoʻl tumani', 1, 1),
+    (4, 'Xonobod', 'Xonobod tumani', 1, 1),
+    (5, 'Buxoro', 'Buxoro shahri', 2, 1),
+    (6, 'Baxt', 'Baxt tumani', 2, 1),
+    (7, 'Gʻijduvon', 'Gʻijduvon tumani', 2, 1),
+    (8, 'Gʻallaorol', 'Gʻallaorol tumani', 2, 1),
+    (9, 'Fargʻona', 'Fargʻona shahri', 3, 1),
+    (10, 'Fargʻona', 'Fargʻona tumani', 3, 1),
+    (11, 'Quva', 'Quva tumani', 3, 1),
+    (12, 'Rishton', 'Rishton tumani', 3, 1),
+    (13, 'Jizzax', 'Jizzax shahri', 4, 1),
+    (14, 'Zomin', 'Zomin tumani', 4, 1),
+    (15, 'Dustlik', 'Dustlik tumani', 4, 1),
+    (16, 'Gagarin', 'Gagarin tumani', 4, 1),
+    (17, 'Namangan', 'Namangan shahri', 5, 1),
+    (18, 'Norin', 'Norin tumani', 5, 1),
+    (19, 'Pop', 'Pop tumani', 5, 1),
+    (20, 'Uychi', 'Uychi tumani', 5, 1),
+    (21, 'Navoiy', 'Navoiy shahri', 6, 1),
+    (22, 'Kyzyltepa', 'Kyzyltepa tumani', 6, 1),
+    (23, 'Kangly', 'Kangly tumani', 6, 1),
+    (24, 'Nurobod', 'Nurobod tumani', 6, 1),
+    (25, 'Qarshi', 'Qarshi shahri', 7, 1),
+    (26, 'Koson', 'Koson tumani', 7, 1),
+    (27, 'Shahrisabz', 'Shahrisabz shahri', 7, 1),
+    (28, 'Kamashi', 'Kamashi tumani', 7, 1),
+    (29, 'Samarqand', 'Samarqand shahri', 8, 1),
+    (30, 'Ishtixon', 'Ishtixon tumani', 8, 1),
+    (31, 'Nurobod', 'Nurobod tumani', 8, 1),
+    (32, 'Pastdargʻom', 'Pastdargʻom tumani', 8, 1),
+    (33, 'Guliston', 'Guliston shahri', 9, 1),
+    (34, 'Gʻuzor', 'Gʻuzor tumani', 9, 1),
+    (35, 'Mirzaobod', 'Mirzaobod tumani', 9, 1),
+    (36, 'Sayxunobod', 'Sayxunobod tumani', 9, 1),
+    (37, 'Toshkent', 'Toshkent shahri', 10, 1),
+    (38, 'Bekobod', 'Bekobod tumani', 10, 1),
+    (39, 'Bostanlik', 'Bostanlik tumani', 10, 1),
+    (40, 'Zangiata', 'Zangiata tumani', 10, 1),
+    (41, 'Toshkent', 'Toshkent shahri', 11, 1),
+    (42, 'Qibray', 'Qibray tumani', 11, 1),
+    (43, 'Yangiyul', 'Yangiyul tumani', 11, 1),
+    (44, 'Zangiota', 'Zangiota tumani', 11, 1),
+    (45, 'Urganch', 'Urganch shahri', 12, 1),
+    (46, 'Bogʻot', 'Bogʻot tumani', 12, 1),
+    (47, 'Gurlan', 'Gurlan tumani', 12, 1),
+    (48, 'Hazorasp', 'Hazorasp tumani', 12, 1),
+    (49, 'Nukus', 'Nukus shahri', 13, 1),
+    (50, 'Qoʻngʻirot', 'Qoʻngʻirot tumani', 13, 1),
+    (51, 'Nukus', 'Nukus shahri', 13, 1);

@@ -1,8 +1,10 @@
 ﻿using MedApplication.Common.Identity.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase
@@ -12,6 +14,7 @@ public class UserController : ControllerBase
     {
         _userModuleService = userModuleService;
     }
+
     [HttpGet("{userId:long}")]
     public async ValueTask<IActionResult> GetById([FromRoute] long userId)
     {

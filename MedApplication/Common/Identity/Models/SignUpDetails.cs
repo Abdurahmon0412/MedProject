@@ -11,9 +11,14 @@ public class SignUpDetails
     public string FullName { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets last name of the sign up details
+    /// Gets or sets full name of the sign up details
     /// </summary>
     public string ShortName { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets username of the sign up details
+    /// </summary>
+    public string UserName { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets age of the sign up details
@@ -39,4 +44,16 @@ public class SignUpDetails
     /// Gets or sets auto generate password of sign up Details
     /// </summary>
     public bool AutoGeneratePassword { get; set; }
+
+    /// <summary>
+    /// Gets or sets organizationId of the sign up details
+    /// </summary>
+    public int OrganizationId { get; set; }
+
+    /// <summary>
+    /// Gets or sets genderId of the sign up details
+    /// </summary>
+    public int GenderId { get; set; }
+
+
 }

@@ -35,4 +35,9 @@ public class RoleService : IRoleService
             .FirstOrDefaultAsync(cancellationToken);
         return roleId;
     }
+
+    public ValueTask<Role?> GetByIdAsync(int roleId, bool asNoTracking = false, CancellationToken cancellationToken = default)
+    {
+        return _roleRepository.GetByIdAsync(roleId, asNoTracking, cancellationToken);
+    }
 }

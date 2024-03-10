@@ -24,5 +24,9 @@ public partial class MContext : DbContext
     public virtual DbSet<Status> Statuses { get; set; }
     public virtual DbSet<UserModule> UserModules { get; set; }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+    }
 }

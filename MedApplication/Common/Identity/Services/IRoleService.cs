@@ -31,4 +31,13 @@ public interface IRoleService
         bool asNoTracking = false,
         CancellationToken cancellationToken = default
     );
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="roleId"></param>
+    /// <param name="asNoTracking"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public ValueTask<Role?> GetByIdAsync(int roleId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 }

@@ -10,3 +10,8 @@ CREATE TABLE IF NOT EXISTS gender
     modified_date              timestamp without time zone,
     modified_user_id           integer
 )
+
+INSERT INTO gender (id, short_name, full_name, created_user_id)
+VALUES 
+    (1,'Male', 'Male', 1),
+    (2,'Female', 'Female', 1);

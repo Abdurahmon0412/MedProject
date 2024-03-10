@@ -20,7 +20,7 @@ public class UserModule : IEntity<long>
 
     [Column("user_name")]
     [StringLength(100)]
-    public string UserName { get; set; } = null!;
+    public string UserName { get; set; } = null!;   
 
     [Column("password")]
     [StringLength(100)]
