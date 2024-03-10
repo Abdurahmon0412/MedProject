@@ -99,12 +99,28 @@ public static partial class HostConfiguration
         return builder;
     }
 
+    public static WebApplicationBuilder AddDevTools(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddSwaggerGen();
+        builder.Services.AddEndpointsApiExplorer();
+
+        return builder;
+    }
+
     public static WebApplicationBuilder AddExposers(this WebApplicationBuilder builder)
     {
         builder.Services.AddRouting(options => options.LowercaseUrls = true);
         builder.Services.AddControllers();
 
         return builder;
+    }
+
+    public static WebApplication UseDevTools(this WebApplication app)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+
+        return app;
     }
 
     public static ValueTask<WebApplication> SeedDataAsync(this WebApplication app)

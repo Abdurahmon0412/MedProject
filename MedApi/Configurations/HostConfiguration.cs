@@ -10,6 +10,7 @@
                 .AddNotificationInfrastructure()
                 .AddVerificationInfrastructure()
                 .AddIdentityInfrastructure()
+                .AddDevTools()
                 .AddExposers();
 
             return new(builder);
@@ -21,6 +22,7 @@
 
             app
                 .UseExposers()
+                .UseDevTools() 
                 .UseIdentityInfrastructure();
 
             return app;
