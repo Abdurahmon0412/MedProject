@@ -35,7 +35,7 @@ public class Address : IEntity<int>
 
     [ForeignKey(nameof(OblastId))]
     [InverseProperty("Addresses")]
-    public virtual Oblast Oblast { get; set; } = null!;
+    public virtual Oblast Oblast { get; set; }
     [ForeignKey(nameof(RegionId))]
     [InverseProperty("Addresses")]
     public virtual Region Region { get; set; } = null!;

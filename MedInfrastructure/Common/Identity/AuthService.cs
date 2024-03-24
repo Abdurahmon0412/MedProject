@@ -53,9 +53,9 @@ public class AuthService : IAuthService
             : _passwordGeneratorService.GetValidatedPassword(signUpDetails.Password!, user);
 
         user.RoleId = await _roleService.GetDefaultRoleId(cancellationToken);
-        var org = await _organizationService.GetByIdAsync(signUpDetails.OrganizationId, cancellationToken: cancellationToken);
+        var org = _mapper.Map<Organization>( await _organizationService.GetByIdAsync(signUpDetails.OrganizationId, cancellationToken: cancellationToken));
         user.Role = await _roleService.GetByIdAsync(user.RoleId, cancellationToken: cancellationToken);
-        user.OrganizationId = org.Id;
+        user.OrganizationId = signUpDetails.OrganizationId;
         user.RegionId = org.RegionId;
         user.OblastId = org.OblastId;
         user.LanguageId = 1;

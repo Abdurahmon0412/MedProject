@@ -1,6 +1,7 @@
 ﻿using MedDomain.Entities;
 using MedPersistance.DataContext;
 using MedPersistance.Repositories.Base;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MedPersistance.Repositories.OrganizationRepository;
@@ -29,4 +30,6 @@ public class OrganizationRepository : EntityRepositoryBase<int, Organization, MC
     {
         return base.DeleteAsync(organization, cancellationToken: cancellationToken);
     }
+
+    public IQueryable<Organization> SelectAll() => base.SelectAll();
 }

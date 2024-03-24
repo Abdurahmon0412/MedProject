@@ -1,4 +1,5 @@
-﻿using MedDomain.Entities;
+﻿using MedApplication.Common.Dtos.Organization;
+using MedDomain.Entities;
 using System.Linq.Expressions;
 
 namespace MedApplication.Common.EntityServices;
@@ -22,7 +23,7 @@ public interface IOrganizationService
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Organization?> GetByIdAsync(int organizationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<OrganizationForResultDto?> GetByIdAsync(int organizationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a list of users based on a collection of user IDs.
@@ -40,7 +41,7 @@ public interface IOrganizationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the created User object.</returns>
-    ValueTask<Organization> CreateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<OrganizationForResultDto> CreateAsync(OrganizationForCreationDto organization, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing user.
@@ -49,7 +50,7 @@ public interface IOrganizationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the updated User object.</returns>
-    ValueTask<Organization> UpdateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<OrganizationForResultDto> UpdateAsync(OrganizationForUpdateDto organization, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user by their unique identifier.
@@ -58,7 +59,7 @@ public interface IOrganizationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(int organizationId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<OrganizationForResultDto> DeleteByIdAsync(int organizationId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user.

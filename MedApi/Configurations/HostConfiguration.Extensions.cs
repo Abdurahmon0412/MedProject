@@ -35,6 +35,7 @@ using MedPersistance.Repositories.RoletypeRepositories;
 using MedPersistance.Repositories.StatusRepositories;
 using MedPersistance.Repositories.WeekDays;
 using MedPersistance.Repositories.WorkingHours;
+using MedApplication.Common.Mappings;
 
 namespace MedApi.Configurations;
 
@@ -62,8 +63,8 @@ public static partial class HostConfiguration
     public static WebApplicationBuilder AddMappers(this WebApplicationBuilder builder)
     {
         // register automapper
-        builder.Services.AddAutoMapper(Assemblies);
-
+        //builder.Services.AddAutoMapper(Assemblies);
+        builder.Services.AddAutoMapper(typeof(Mapping));
         return builder;
     }
 

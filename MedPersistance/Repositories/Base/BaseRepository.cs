@@ -94,4 +94,7 @@ public abstract class EntityRepositoryBase<TId ,TEntity, TContext> where TEntity
 
         return entity;
     }
+
+    protected IQueryable<TEntity> SelectAll()
+         => _context.Set<TEntity>();
 }

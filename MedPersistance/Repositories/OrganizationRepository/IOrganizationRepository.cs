@@ -16,4 +16,6 @@ public interface IOrganizationRepository
     ValueTask<Organization> DeleteByIdAsync(int organizationId, CancellationToken cancellationToken = default);
 
     ValueTask<Organization> DeleteAsync(Organization organization, CancellationToken cancellationToken = default);
+
+    IQueryable<Organization> SelectAll();
 }
