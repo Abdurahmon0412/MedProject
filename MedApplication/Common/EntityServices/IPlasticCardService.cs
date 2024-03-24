@@ -1,28 +1,33 @@
 ﻿using MedDomain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace MedApplication.Common.EntityServices;
 
-public interface IOrganizationService
+public interface IPlasticCardService
 {
     /// <summary>
-    /// Retrieves a collection of organizations based on the specified predicate.
+    /// Retrieves a collection of plasticCards based on the specified predicate.
     /// </summary>
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Organization> Get(Expression<Func<Organization,
+    IQueryable<PlasticCard> Get(Expression<Func<PlasticCard,
         bool>>? predicate = default,
         bool asNoTracking = false);
 
     /// <summary>
-    /// Retrieves a organization by their unique identifier.
+    /// Retrieves a plasticCard by their unique identifier.
     /// </summary>
-    /// <param name="organizationsId"></param>
+    /// <param name="plasticCardsId"></param>
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Organization?> GetByIdAsync(int organizationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<PlasticCard?> GetByIdAsync(int plasticCardsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a list of users based on a collection of user IDs.
@@ -40,33 +45,33 @@ public interface IOrganizationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the created User object.</returns>
-    ValueTask<Organization> CreateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<PlasticCard> CreateAsync(PlasticCard plasticCard, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing user.
     /// </summary>
-    /// <param name="organization"></param>
+    /// <param name="plasticCard"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the updated User object.</returns>
-    ValueTask<Organization> UpdateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<PlasticCard> UpdateAsync(PlasticCard plasticCard, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user by their unique identifier.
     /// </summary>
-    /// <param name="organizationId"></param>
+    /// <param name="plasticCardId"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(int organizationId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    void DeleteByIdAsync(int plasticCardId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user.
     /// </summary>
-    /// <param name="organization"></param>
+    /// <param name="plasticCard"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    void DeleteAsync(PlasticCard plasticCard, bool saveChanges = true, CancellationToken cancellationToken = default);
 
 }

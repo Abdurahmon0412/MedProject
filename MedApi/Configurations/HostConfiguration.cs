@@ -11,6 +11,8 @@
                 .AddVerificationInfrastructure()
                 .AddIdentityInfrastructure()
                 .AddDevTools()
+                .AddEntityService()
+                .AddEntityRepositories()
                 .AddExposers();
 
             return new(builder);

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace MedApplication.Common.EntityServices;
 
-public interface IOrganizationService
+public interface IExaminationService
 {
     /// <summary>
     /// Retrieves a collection of organizations based on the specified predicate.
@@ -11,21 +11,21 @@ public interface IOrganizationService
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Organization> Get(Expression<Func<Organization,
+    IQueryable<Examination> Get(Expression<Func<Examination,
         bool>>? predicate = default,
         bool asNoTracking = false);
 
     /// <summary>
-    /// Retrieves a organization by their unique identifier.
+    /// Retrieves a Examination by their unique identifier.
     /// </summary>
-    /// <param name="organizationsId"></param>
+    /// <param name="examinationsId"></param>
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Organization?> GetByIdAsync(int organizationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<Examination?> GetByIdAsync(int examinationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Retrieves a list of users based on a collection of user IDs.
+    /// Retrieves a list of examination based on a collection of user IDs.
     /// </summary>
     /// <param name="ids"></param>
     /// <param name="asNoTracking"></param>
@@ -36,37 +36,37 @@ public interface IOrganizationService
     /// <summary>
     /// Creates a new user.
     /// </summary>
-    /// <param name="user"></param>
+    /// <param name="examination"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
-    /// <returns>Returning the created User object.</returns>
-    ValueTask<Organization> CreateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    /// <returns>Returning the created examination object.</returns>
+    ValueTask<Examination> CreateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Updates an existing user.
+    /// Updates an existing examination.
     /// </summary>
-    /// <param name="organization"></param>
+    /// <param name="examination"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
-    /// <returns>Returning the updated User object.</returns>
-    ValueTask<Organization> UpdateAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    /// <returns>Returning the updated examination object.</returns>
+    ValueTask<Examination> UpdateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a user by their unique identifier.
+    /// Deletes a examination by their unique identifier.
     /// </summary>
-    /// <param name="organizationId"></param>
+    /// <param name="examinationId"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
-    /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(int organizationId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    /// <returns>Returning the deleted examination object.</returns>
+    void DeleteByIdAsync(int examinationId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Deletes a user.
+    /// Deletes a examination.
     /// </summary>
-    /// <param name="organization"></param>
+    /// <param name="examination"></param>
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
-    /// <returns>Returning the deleted User object.</returns>
-    void DeleteAsync(Organization organization, bool saveChanges = true, CancellationToken cancellationToken = default);
+    /// <returns>Returning the deleted examination object.</returns>
+    void DeleteAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default);
 
 }

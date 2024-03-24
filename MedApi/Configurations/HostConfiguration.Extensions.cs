@@ -16,6 +16,25 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using MedApplication.Common.Settings;
 using System.Text;
+using MedPersistance.Repositories.Departments;
+using MedPersistance.Repositories.Diagnoses;
+using MedPersistance.Repositories.DoctorInfos;
+using MedPersistance.Repositories.DoctorPlaces;
+using MedPersistance.Repositories.Doctors;
+using MedPersistance.Repositories.Examinations;
+using MedPersistance.Repositories.Genders;
+using MedPersistance.Repositories.Languages;
+using MedPersistance.Repositories.Medicines;
+using MedPersistance.Repositories.OblastRepository;
+using MedPersistance.Repositories.Patients;
+using MedPersistance.Repositories.PaymentHystorys;
+using MedPersistance.Repositories.Payments;
+using MedPersistance.Repositories.PlasticCards;
+using MedPersistance.Repositories.Regions;
+using MedPersistance.Repositories.RoletypeRepositories;
+using MedPersistance.Repositories.StatusRepositories;
+using MedPersistance.Repositories.WeekDays;
+using MedPersistance.Repositories.WorkingHours;
 
 namespace MedApi.Configurations;
 
@@ -83,11 +102,7 @@ public static partial class HostConfiguration
             .AddTransient<IPasswordHasherService, PasswordHasherService>()
             .AddTransient<IPasswordGeneratorService, PasswordGeneratorService>();
 
-        // register foundation data access services
-        builder.Services
-            .AddScoped<IUserModuleService, UserModuleService>()
-            .AddScoped<IRoleService, RoleService>()
-            .AddScoped<IOrganizationService, OrganizationService>();
+        
 
         // register other higher services
         builder.Services
@@ -106,6 +121,63 @@ public static partial class HostConfiguration
         // register repositories
         // register foundation data access services
         // register other higher services
+
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddEntityService(this WebApplicationBuilder builder)
+    {
+        // register foundation data access services
+        builder.Services
+            .AddScoped<IUserModuleService, UserModuleService>()
+            .AddScoped<IRoleService, RoleService>()
+            .AddScoped<IOrganizationService, OrganizationService>()
+            .AddScoped<IDepartmentService, DepartmentService>()
+            .AddScoped<IDiagnoseService, DiagnoseService>()
+            .AddScoped<IDoctorInfoService, DoctorInfoService>()
+            .AddScoped<IDoctorPlaceService, DoctorPlaceService>()
+            .AddScoped<IDoctorService, DoctorService>()
+            .AddScoped<IExaminationService, ExaminationService>()
+            .AddScoped<IGenderService, GenderService>()
+            .AddScoped<ILanguageService, LanguageService>()
+            .AddScoped<IMedicineService, MedicineService>()
+            .AddScoped<IOblastService, OblastService>()
+            .AddScoped<IPatientService, PatientService>()
+            .AddScoped<IPaymentHystoryService, PaymentHystoryService>()
+            .AddScoped<IPaymentService, PaymentService>()
+            .AddScoped<IPlasticCardService, PlasticCardService>()
+            .AddScoped<IRegionService, RegionService>()
+            .AddScoped<IRoletypeService, RoletypeService>()
+            .AddScoped<IStatusService, StatusService>()
+            .AddScoped<IWeekDayService, WeekDayService>()
+            .AddScoped<IWorkingHourService, WorkingHourService>();
+        
+        return builder;
+    }
+
+    public static WebApplicationBuilder AddEntityRepositories(this WebApplicationBuilder builder)
+    {
+        // register foundation data access services
+        builder.Services
+            .AddScoped<IDepartmentRepository, DepartmentRepository>()
+            .AddScoped<IDiagnoseRepository, DiagnoseRepository>()
+            .AddScoped<IDoctorInfoRepository, DoctorInfoRepository>()
+            .AddScoped<IDoctorPlaceRepository, DoctorPlaceRepository>()
+            .AddScoped<IDoctorRepository, DoctorRepository>()
+            .AddScoped<IExaminationRepository, ExaminationRepository>()
+            .AddScoped<IGenderRepository, GenderRepository>()
+            .AddScoped<ILanguageRepository, LanguageRepository>()
+            .AddScoped<IMedicineRepository, MedicineRepository>()
+            .AddScoped<IOblastRepository, OblastRepository>()
+            .AddScoped<IPatientRepository, PatientRepository>()
+            .AddScoped<IPaymentHystoryRepository, PaymentHystoryRepository>()
+            .AddScoped<IPaymentRepository, PaymentRepository>()
+            .AddScoped<IPlasticCardRepository, PlasticCardRepository>()
+            .AddScoped<IRegionRepository, RegionRepository>()
+            .AddScoped<IRoletypeRepository, RoletypeRepository>()
+            .AddScoped<IStatusRepository, StatusRepository>()
+            .AddScoped<IWeekDayRepository, WeekDayRepository>()
+            .AddScoped<IWorkingHourRepository, WorkingHourRepository>();
 
         return builder;
     }
