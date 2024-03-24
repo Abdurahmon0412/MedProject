@@ -30,7 +30,7 @@ public class TokenGeneratorService : ITokenGeneratorService
     {
         var claims = GetClaims(user);
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(SecretKey));
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(_jwtSettings.SecretKey));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
         return new JwtSecurityToken(
@@ -38,7 +38,7 @@ public class TokenGeneratorService : ITokenGeneratorService
             audience: _jwtSettings.ValidAudience,
             claims: claims,
             notBefore: DateTime.UtcNow,
-            expires: DateTime.Now.AddDays(_jwtSettings.ExpirationTimeInMinutes),
+            expires: DateTime.Now.AddMinutes(_jwtSettings.ExpirationTimeInMinutes),
             signingCredentials: credentials);
     }
 

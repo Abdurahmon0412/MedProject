@@ -21,9 +21,9 @@
             await app.SeedDataAsync();
 
             app
+                .UseIdentityInfrastructure()
                 .UseExposers()
-                .UseDevTools() 
-                .UseIdentityInfrastructure();
+                .UseDevTools(); 
 
             return app;
         }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedApi.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 [ApiController]
 [Route("api/[controller]")]
 public class UserController : ControllerBase

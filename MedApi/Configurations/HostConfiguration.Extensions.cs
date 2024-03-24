@@ -205,8 +205,8 @@ public static partial class HostConfiguration
 
     public static WebApplication UseIdentityInfrastructure(this WebApplication app)
     {
-        app.UseAuthorization();
         app.UseAuthentication();
+        app.UseAuthorization();
 
         return app;
     }
