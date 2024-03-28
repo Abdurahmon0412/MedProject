@@ -18,13 +18,7 @@ public class OrganizationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateOrganizationAsync([FromBody] OrganizationForCreationDto dto)
     {
-        var response = new Result
-        {
-            StatusCode = 200,
-            Message = "Success",
-            Data = await this._organizationService.CreateAsync(dto)
-        };
-        return Ok(response);
+        return Ok(_organizationService.CreateAsync(dto));
     }
     //[HttpGet]
     //public async Task<IActionResult> GetAllOrganizationsAsync([FromQuery] PaginationParams @params)

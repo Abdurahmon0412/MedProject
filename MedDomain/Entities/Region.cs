@@ -43,5 +43,8 @@ public class Region : IEntity<int>
 
     [InverseProperty("Region")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
+
+    [InverseProperty("Region")]
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 }
 

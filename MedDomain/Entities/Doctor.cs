@@ -49,6 +49,7 @@ public class Doctor : IEntity<int>
     [ForeignKey(nameof(PatientId))]
     [InverseProperty("Doctors")]
     public virtual Patient? Patient { get; set; }
+
     [ForeignKey(nameof(UserModuleId))]
     [InverseProperty("Doctors")]
     public virtual UserModule UserModule { get; set; } = null!;

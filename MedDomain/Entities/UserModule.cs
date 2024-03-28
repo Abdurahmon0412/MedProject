@@ -102,4 +102,11 @@ public class UserModule : IEntity<long>
     [ForeignKey("StatusId")]
     [InverseProperty("UserModules")]
     public virtual Status Status { get; set; } = null!;
+
+    [InverseProperty("UserModule")]
+    public virtual ICollection<Doctor> Doctors { get; set; } = new List<Doctor>();
+
+    [InverseProperty("UserModule")]
+    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
+
 }

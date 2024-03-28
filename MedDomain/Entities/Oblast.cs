@@ -38,6 +38,8 @@ public class Oblast : IEntity<int>
 
     [InverseProperty("Oblast")]
     public virtual ICollection<Organization> Organizations { get; set; } = new List<Organization>();
+    [InverseProperty("Oblast")]
+    public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
 
     [InverseProperty("Oblast")]
     public virtual ICollection<Region> Regions { get; set; } = new List<Region>();

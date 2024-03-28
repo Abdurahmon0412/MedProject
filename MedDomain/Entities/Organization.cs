@@ -60,4 +60,7 @@ public class Organization : IEntity<int>
 
     [InverseProperty("Organization")]
     public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
+
+    [InverseProperty("Organization")]
+    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
 }
