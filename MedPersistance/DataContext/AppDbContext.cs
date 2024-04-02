@@ -36,7 +36,7 @@ public partial class MContext : DbContext
     public virtual DbSet<Payment> Payments { get; set; }
     public virtual DbSet<WeekDay> WeekDays { get; set; }
     public virtual DbSet<WorkingHour> WorkingHours { get; set; }
-
+    public virtual DbSet<UserModule> UserModules { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

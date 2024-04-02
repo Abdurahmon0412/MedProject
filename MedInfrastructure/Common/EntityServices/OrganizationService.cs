@@ -18,9 +18,10 @@ public class OrganizationService : IOrganizationService
         _mapper = mapper;
     }
 
-    public IQueryable<Organization> Get(Expression<Func<Organization, bool>>? predicate = default, bool asNoTracking = false)
+    public IQueryable<OrganizationForResultDto> Get(Expression<Func<Organization, bool>>? predicate = default, bool asNoTracking = false)
     {
-        return _organizationRepository.Get(predicate, asNoTracking).Include(o => o.UserModules);
+        return _organizationRepository.Get(predicate, asNoTracking).Include(o => o.UserModules)
+            .Select( item => _mapper.Map<OrganizationForResultDto>(item));
     }
 
     public async ValueTask<OrganizationForResultDto?> GetByIdAsync(int organizationId, bool asNoTracking = false, CancellationToken cancellationToken = default)
@@ -62,18 +63,18 @@ public class OrganizationService : IOrganizationService
 
     public async ValueTask<OrganizationForResultDto> UpdateAsync(OrganizationForUpdateDto organization, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        var neworganization = await _organizationRepository.SelectAll()
+        Organization? neworganization = await _organizationRepository.SelectAll()
                 .Where(o => o.Id == organization.Id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         if (neworganization == null)
         {
-            throw new Exception("Organization does not exist or is inactive");
+            throw new Exception("Organization does not exist!!!");
         }
 
-        neworganization.ModifiedDate = DateTime.UtcNow;
-        
-        var updatedOrganization = await _organizationRepository.UpdateAsync(neworganization);
+        //neworganization.ModifiedDate = DateTime.UtcNow;
+
+        var updatedOrganization = await _organizationRepository.UpdateAsync(neworganization, cancellationToken: cancellationToken);
 
         return _mapper.Map<OrganizationForResultDto>(updatedOrganization);
     }

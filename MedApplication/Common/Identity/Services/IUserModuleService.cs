@@ -73,7 +73,7 @@ public interface IUserModuleService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(long userId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<UserModule> DeleteByIdAsync(long userId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user.

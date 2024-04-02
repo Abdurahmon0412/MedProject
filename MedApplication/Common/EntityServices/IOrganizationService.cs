@@ -12,7 +12,7 @@ public interface IOrganizationService
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Organization> Get(Expression<Func<Organization,
+    IQueryable<OrganizationForResultDto> Get(Expression<Func<Organization,
         bool>>? predicate = default,
         bool asNoTracking = false);
 

@@ -23,7 +23,7 @@ public class SignUpDetails
     /// <summary>
     /// Gets or sets age of the sign up details
     /// </summary>
-    public int Age { get; set; }
+    //public int Age { get; set; }
 
     /// <summary>
     /// Gets or sets email address of the sign up details

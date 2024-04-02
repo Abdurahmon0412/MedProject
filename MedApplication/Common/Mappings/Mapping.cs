@@ -13,6 +13,7 @@ using MedApplication.Common.Dtos.PaymentHystory;
 using MedApplication.Common.Dtos.PlasticCard;
 using MedApplication.Common.Dtos.WeekDay;
 using MedApplication.Common.Dtos.WorkingHour;
+using MedApplication.Common.Identity.Models;
 using MedDomain.Entities;
 
 namespace MedApplication.Common.Mappings;
@@ -21,6 +22,8 @@ public class Mapping : Profile
 {
     public Mapping()
     {
+        CreateMap<UserModule, SignUpDetails>().ReverseMap();
+        
         //Organization
         CreateMap<Organization, OrganizationForCreationDto>().ReverseMap();
         CreateMap<Organization, OrganizationForUpdateDto>().ReverseMap();

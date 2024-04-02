@@ -1,4 +1,6 @@
-﻿using MedDomain.Entities;
+﻿using MedApplication.Common.Dtos.Department;
+using MedApplication.Common.Dtos.Organization;
+using MedDomain.Entities;
 using System.Linq.Expressions;
 
 namespace MedApplication.Common.EntityServices;
@@ -11,7 +13,7 @@ public interface IDepartmentService
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Department> Get(Expression<Func<Department,
+    IQueryable<DepartmentForResultDto> Get(Expression<Func<Department,
         bool>>? predicate = default,
         bool asNoTracking = false);
 
@@ -22,7 +24,7 @@ public interface IDepartmentService
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Department?> GetByIdAsync(int departmentsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<DepartmentForResultDto?> GetByIdAsync(int departmentsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a list of users based on a collection of user IDs.
@@ -40,7 +42,7 @@ public interface IDepartmentService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the created User object.</returns>
-    ValueTask<Department> CreateAsync(Department department, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<DepartmentForResultDto> CreateAsync(DepartmentForCreationDto department, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing user.
@@ -49,7 +51,7 @@ public interface IDepartmentService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the updated User object.</returns>
-    ValueTask<Department> UpdateAsync(Department address, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<DepartmentForResultDto> UpdateAsync(DepartmentForUpdateDto address, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user by their unique identifier.
@@ -58,7 +60,7 @@ public interface IDepartmentService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(int departmentId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<DepartmentForResultDto> DeleteByIdAsync(int departmentId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user.

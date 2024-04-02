@@ -23,11 +23,11 @@ public class Department : IEntity<int>
     public string FullName { get; set; } = null!;
     [Column("price")]
     public decimal? Price { get; set; }
-    [Column("created_date", TypeName = "timestamp without time zone")]
+    [Column("created_date")]
     public DateTime CreatedDate { get; set; }
     [Column("created_user_id")]
     public int? CreatedUserId { get; set; }
-    [Column("modified_date", TypeName = "timestamp without time zone")]
+    [Column("modified_date")]
     public DateTime? ModifiedDate { get; set; }
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }

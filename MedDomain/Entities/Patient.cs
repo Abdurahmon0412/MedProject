@@ -24,7 +24,7 @@ public class Patient : IEntity<int>
     [Column("diagnose_id")]
     public int DiagnoseId { get; set; }
     [Column("organization_id")]
-    public int OrganizationId { get; set; }
+    public int OrganizationId { get; set; } 
     [Column("examination_id")]
     public int ExaminationId { get; set; }
     [Column("payment_id")]

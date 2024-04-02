@@ -18,57 +18,32 @@ public class OrganizationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateOrganizationAsync([FromBody] OrganizationForCreationDto dto)
     {
-        return Ok(_organizationService.CreateAsync(dto));
+        return Ok(value: await _organizationService.CreateAsync(dto));
     }
-    //[HttpGet]
-    //public async Task<IActionResult> GetAllOrganizationsAsync([FromQuery] PaginationParams @params)
-    //{
-    //    var response = new Response
-    //    {
-    //        StatusCode = 200,
-    //        Message = "Success",
-    //        Data = await this._organizationService.GetAllAsync(@params)
-    //    };
-    //    response.MapPaginationHeader();
-    //    return Ok(response);
-    //}
+
+    [HttpGet("organizations")]
+    public async Task<IActionResult> GetAllOrganizationsAsync()
+    {
+        return Ok(_organizationService.Get());
+    }
 
     //[Authorize]
-    //[HttpGet("me")]
-    //public async Task<IActionResult> GetOrganizationById()
-    //{
-    //    var UserId = Guid.Parse(HttpContext.User.FindFirstValue("Id"));
-    //    var response = new Response
-    //    {
-    //        StatusCode = 200,
-    //        Message = "Success",
-    //        Data = await this._organizationService.GetByIdAsync(UserId)
-    //    };
-    //    return Ok(response);
-    //}
+    [HttpGet("organizationId")]
+    public async Task<IActionResult> GetOrganizationById(int id)
+    {
+        return Ok(await this._organizationService.GetByIdAsync(id));
+    }
 
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> UpdateAsync([FromRoute(Name = "id")] Guid Id, [FromForm] OrganizationForUpdateDto dto)
-    //{
-    //    var response = new Response
-    //    {
-    //        StatusCode = 200,
-    //        Message = "Success",
-    //        Data = await this._organizationService.UpdateAsync(Id, dto)
-    //    };
-    //    return Ok(response);
-    //}
+    [HttpPut]
+    public async Task<IActionResult> UpdateAsync([FromBody] OrganizationForUpdateDto dto)
+    {
+        return Ok(await _organizationService.UpdateAsync(dto));
+    }
 
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] Guid Id)
-    //{
-    //    var response = new Response
-    //    {
-    //        StatusCode = 200,
-    //        Message = "Success",
-    //        Data = await this._organizationService.RemoveAsync(Id)
-    //    };
-    //    return Ok(response);
-    //}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync([FromRoute(Name = "id")] int Id)
+    {
+        return Ok(await _organizationService.DeleteByIdAsync(Id));
+    }
 }

@@ -16,4 +16,6 @@ public interface IDepartmentRepository
     ValueTask<Department> DeleteByIdAsync(int genderId, CancellationToken cancellationToken = default);
 
     ValueTask<Department> DeleteAsync(Department gender, CancellationToken cancellationToken = default);
+
+    IQueryable<Department> SelectAll();
 }

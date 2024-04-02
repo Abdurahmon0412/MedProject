@@ -38,13 +38,13 @@ public class Organization : IEntity<int>
     [Column("region_id")]
     public int RegionId { get; set; }
 
-    [Column("created_date", TypeName = "timestamp without time zone")]
+    [Column("created_date")]
     public DateTime CreatedDate { get; set; }
 
     [Column("created_user_id")]
     public int? CreatedUserId { get; set; }
 
-    [Column("modified_date", TypeName = "timestamp without time zone")]
+    [Column("modified_date")]
     public DateTime? ModifiedDate { get; set; }
 
     [Column("modified_user_id")]

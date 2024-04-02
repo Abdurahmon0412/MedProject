@@ -58,9 +58,10 @@ public class UserModuleService : IUserModuleService
         return _userRepository.UpdateAsync(user, saveChanges, cancellationToken);
     }
 
-    public void DeleteByIdAsync(long userId, bool saveChanges = true, CancellationToken cancellationToken = default)
+    public async ValueTask<UserModule> DeleteByIdAsync(long userId, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        _userRepository.DeleteByIdAsync(userId, cancellationToken);
+        var deletedUser = await _userRepository.DeleteByIdAsync(userId, cancellationToken);
+        return deletedUser;
     }
 
     public void DeleteAsync(UserModule user, bool saveChanges = true, CancellationToken cancellationToken = default)
