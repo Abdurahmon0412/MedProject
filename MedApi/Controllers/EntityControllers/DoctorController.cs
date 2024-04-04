@@ -1,5 +1,6 @@
 ﻿using MedApplication.Common.Dtos.Doctor;
 using MedApplication.Common.EntityServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedApi.Controllers.EntityControllers;
@@ -23,7 +24,7 @@ public class DoctorController : ControllerBase
         return Ok(_doctorService.Get());
     }
 
-    //[Authorize]
+    [Authorize]
     [HttpGet("doctorId")]
     public async Task<IActionResult> GetDoctorById(int id)
     {

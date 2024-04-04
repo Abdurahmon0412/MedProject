@@ -10,7 +10,7 @@
                 .AddNotificationInfrastructure()
                 .AddVerificationInfrastructure()
                 .AddIdentityInfrastructure()
-                .AddDevTools()
+                .AddDevTools(builder.Configuration)
                 .AddEntityService()
                 .AddEntityRepositories()
                 .AddExposers();
