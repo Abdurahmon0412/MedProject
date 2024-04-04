@@ -46,7 +46,7 @@ public class ExaminationService : IExaminationService
         //return _organizationRepository.CreateAsync(organization, saveChanges, cancellationToken);
 
         var existingExamination = await _examinationRepository.Get()
-                .Where(o => o.Id == examination.Id)
+                .Where(o => o.Number == examination.Number)
                 .FirstOrDefaultAsync();
 
         if (existingExamination != null)
