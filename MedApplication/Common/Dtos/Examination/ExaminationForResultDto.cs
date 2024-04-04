@@ -1,4 +1,4 @@
-namespace MedApplication.Common.Dtos.Examination;
+namespace MedApplication.Common.Dtos;
 
 public class ExaminationForResultDto
 {

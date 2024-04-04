@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using MedApplication.Common.Dtos;
 using MedApplication.Common.Dtos.Address;
 using MedApplication.Common.Dtos.Department;
 using MedApplication.Common.Dtos.Diagnose;
 using MedApplication.Common.Dtos.Doctor;
 using MedApplication.Common.Dtos.DoctorInfo;
-using MedApplication.Common.Dtos.Examination;
 using MedApplication.Common.Dtos.Medicine;
 using MedApplication.Common.Dtos.Organization;
 using MedApplication.Common.Dtos.Patient;

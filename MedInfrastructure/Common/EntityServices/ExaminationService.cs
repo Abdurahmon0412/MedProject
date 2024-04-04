@@ -1,6 +1,10 @@
-﻿using MedApplication.Common.EntityServices;
+﻿using AutoMapper;
+using MedApplication.Common.Dtos;
+using MedApplication.Common.Dtos.Organization;
+using MedApplication.Common.EntityServices;
 using MedDomain.Entities;
 using MedPersistance.Repositories.Examinations;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MedInfrastructure.Common.EntityServices;
@@ -8,33 +12,86 @@ namespace MedInfrastructure.Common.EntityServices;
 public class ExaminationService : IExaminationService
 {
     private readonly IExaminationRepository _examinationRepository;
-    public ExaminationService(IExaminationRepository examinationRepository)
+    private readonly IMapper _mapper;
+    public ExaminationService(IExaminationRepository examinationRepository, IMapper mapper)
     {
+        _mapper = mapper;
         _examinationRepository = examinationRepository;
     }
 
-    public IQueryable<Examination> Get(Expression<Func<Examination, bool>>? predicate = default, bool asNoTracking = false)
+    public IQueryable<ExaminationForResultDto> Get(Expression<Func<Examination, bool>>? predicate = default, bool asNoTracking = false)
     {
-        return _examinationRepository.Get(predicate, asNoTracking);
+        return _examinationRepository.Get(predicate, asNoTracking).Include(o => o.Patients)
+           .Select(item => _mapper.Map<ExaminationForResultDto>(item));
     }
 
-    public ValueTask<Examination?> GetByIdAsync(int examinationId, bool asNoTracking = false, CancellationToken cancellationToken = default)
+    public async ValueTask<ExaminationForResultDto?> GetByIdAsync(int examinationId, bool asNoTracking = false, CancellationToken cancellationToken = default)
     {
-        return _examinationRepository.GetByIdAsync(examinationId, asNoTracking, cancellationToken);
+        var organization = await _examinationRepository.SelectAll()
+               .Where(o => o.Id == examinationId)
+               .Include(e => e.Patients)
+               .AsNoTracking()
+               .FirstOrDefaultAsync();
+
+        if (organization == null)
+        {
+            throw new Exception("Organization not found or is inactive");
+        }
+
+        return _mapper.Map<ExaminationForResultDto>(organization);
     }
 
-    public ValueTask<Examination> CreateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default)
+    public async ValueTask<ExaminationForResultDto> CreateAsync(ExaminationForCreationDto examination, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        return _examinationRepository.CreateAsync(examination, saveChanges, cancellationToken);
+        //return _organizationRepository.CreateAsync(organization, saveChanges, cancellationToken);
+
+        var existingExamination = await _examinationRepository.Get()
+                .Where(o => o.Id == examination.Id)
+                .FirstOrDefaultAsync();
+
+        if (existingExamination != null)
+        {
+            throw new Exception("Examination already exists");
+        }
+
+        var newExamination = _mapper.Map<Examination>(examination);
+        newExamination.CreatedDate = DateTime.UtcNow;
+
+        var createdExmination = await _examinationRepository.CreateAsync(newExamination, cancellationToken: cancellationToken);
+
+        return _mapper.Map<ExaminationForResultDto>(createdExmination);
     }
 
-    public ValueTask<Examination> UpdateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default)
+    public async ValueTask<ExaminationForResultDto> UpdateAsync(ExaminationForUpdateDto examination, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        return _examinationRepository.UpdateAsync(examination, saveChanges, cancellationToken);
+        var newExamination = await _examinationRepository.SelectAll()
+                .Where(o => o.Id == examination.Id)
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+
+        if (newExamination == null)
+        {
+            throw new Exception("Examination does not exist!!!");
+        }
+
+        newExamination.ModifiedDate = DateTime.UtcNow;
+
+        var updatedExamination = await _examinationRepository.UpdateAsync(newExamination, cancellationToken: cancellationToken);
+
+        return _mapper.Map<ExaminationForResultDto>(updatedExamination);
     }
 
-    public void DeleteByIdAsync(int examinationId, bool saveChanges = true, CancellationToken cancellationToken = default)
-        => _examinationRepository.DeleteByIdAsync(examinationId, cancellationToken);
+    public async ValueTask<ExaminationForResultDto> DeleteByIdAsync(int examinationId, bool saveChanges = true, CancellationToken cancellationToken = default)
+    {
+        var examination = await _examinationRepository.SelectAll()
+                .FirstOrDefaultAsync(o => o.Id == examinationId);
+
+        if (examination == null)
+        {
+            throw new Exception("Examination not found");
+        }
+
+        return _mapper.Map<ExaminationForResultDto>(await _examinationRepository.DeleteByIdAsync(examinationId, cancellationToken));
+    }
     
 
     public void DeleteAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default) 

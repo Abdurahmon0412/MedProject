@@ -1,4 +1,6 @@
-﻿using MedApplication.Common.Dtos.Organization;
+﻿using MedApplication.Common.Dtos.Department;
+using MedApplication.Common.Dtos.Organization;
+using MedApplication.Common.Dtos.Patient;
 using MedDomain.Entities;
 using System.Linq.Expressions;
 
@@ -15,6 +17,14 @@ public interface IOrganizationService
     IQueryable<OrganizationForResultDto> Get(Expression<Func<Organization,
         bool>>? predicate = default,
         bool asNoTracking = false);
+
+    /// <summary>
+    /// Retrieves a collection of organizations based on the specified predicate.
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <param name="asNoTracking"></param>
+    /// <returns>Returning the User object</returns>
+    ValueTask<IQueryable<PatientForResultDto>> GetAllPatientsByOrganizationId(int organizationId, bool asNoTracking = false);
 
     /// <summary>
     /// Retrieves a organization by their unique identifier.

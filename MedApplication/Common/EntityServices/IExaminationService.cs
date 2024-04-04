@@ -1,4 +1,5 @@
-﻿using MedDomain.Entities;
+﻿using MedApplication.Common.Dtos;
+using MedDomain.Entities;
 using System.Linq.Expressions;
 
 namespace MedApplication.Common.EntityServices;
@@ -11,7 +12,7 @@ public interface IExaminationService
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Examination> Get(Expression<Func<Examination,
+    IQueryable<ExaminationForResultDto> Get(Expression<Func<Examination,
         bool>>? predicate = default,
         bool asNoTracking = false);
 
@@ -22,7 +23,7 @@ public interface IExaminationService
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Examination?> GetByIdAsync(int examinationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<ExaminationForResultDto?> GetByIdAsync(int examinationsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a list of examination based on a collection of user IDs.
@@ -40,7 +41,7 @@ public interface IExaminationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the created examination object.</returns>
-    ValueTask<Examination> CreateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<ExaminationForResultDto> CreateAsync(ExaminationForCreationDto examination, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing examination.
@@ -49,7 +50,7 @@ public interface IExaminationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the updated examination object.</returns>
-    ValueTask<Examination> UpdateAsync(Examination examination, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<ExaminationForResultDto> UpdateAsync(ExaminationForUpdateDto examination, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a examination by their unique identifier.
@@ -58,7 +59,7 @@ public interface IExaminationService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted examination object.</returns>
-    void DeleteByIdAsync(int examinationId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<ExaminationForResultDto> DeleteByIdAsync(int examinationId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a examination.

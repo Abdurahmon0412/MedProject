@@ -24,6 +24,11 @@ public class DoctorService : IDoctorService
         return _doctorRepository.Get(predicate, asNoTracking).Select(item => _mapper.Map<DoctorForResultDto>(item));
     }
 
+    public IQueryable<DoctorForResultDto> GetDoctorsByDepartmentId(int departmentId, bool asNoTracking = false)
+    {
+        return _doctorRepository.Get(d => d.DepartmentId == departmentId, asNoTracking).Select(item => _mapper.Map<DoctorForResultDto>(item));
+    }
+
     public async ValueTask<DoctorForResultDto?> GetByIdAsync(int doctorId, bool asNoTracking = false, CancellationToken cancellationToken = default)
     {
         var doctor = await _doctorRepository.SelectAll()

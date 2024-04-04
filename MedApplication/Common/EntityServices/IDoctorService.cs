@@ -23,6 +23,14 @@ public interface IDoctorService
         bool asNoTracking = false);
 
     /// <summary>
+    /// Retrieves a collection of doctor based on the specified predicate.
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <param name="asNoTracking"></param>
+    /// <returns>Returning the User object</returns>
+    IQueryable<DoctorForResultDto> GetDoctorsByDepartmentId(int departmentId, bool asNoTracking = false);
+
+    /// <summary>
     /// Retrieves a doctor by their unique identifier.
     /// </summary>
     /// <param name="doctorsId"></param>

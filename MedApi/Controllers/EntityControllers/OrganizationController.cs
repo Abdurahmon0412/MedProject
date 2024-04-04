@@ -1,6 +1,7 @@
 ﻿using MedApi.Models;
 using MedApplication.Common.Dtos.Organization;
 using MedApplication.Common.EntityServices;
+using MedInfrastructure.Common.EntityServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -25,6 +26,12 @@ public class OrganizationController : ControllerBase
     public async Task<IActionResult> GetAllOrganizationsAsync()
     {
         return Ok(_organizationService.Get());
+    }
+
+    [HttpGet("GetAllPatientsByOrganizationId")]
+    public async Task<IActionResult> GetAllPatientsByDepartmentId(int organizationId)
+    {
+        return Ok(value: await _organizationService.GetAllPatientsByOrganizationId(organizationId, true));
     }
 
     //[Authorize]

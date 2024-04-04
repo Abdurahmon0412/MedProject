@@ -24,6 +24,12 @@ public class DoctorController : ControllerBase
         return Ok(_doctorService.Get());
     }
 
+    [HttpGet("GetDoctorsByDepartmentId")]
+    public async Task<IActionResult> GetAllOrganizationsAsync(int departmentId)
+    {
+        return Ok(_doctorService.GetDoctorsByDepartmentId(departmentId));
+    }
+
     [Authorize]
     [HttpGet("doctorId")]
     public async Task<IActionResult> GetDoctorById(int id)

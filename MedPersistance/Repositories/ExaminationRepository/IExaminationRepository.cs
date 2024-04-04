@@ -16,4 +16,6 @@ public interface IExaminationRepository
     ValueTask<Examination> DeleteByIdAsync(int genderId, CancellationToken cancellationToken = default);
 
     ValueTask<Examination> DeleteAsync(Examination gender, CancellationToken cancellationToken = default);
+
+    IQueryable<Examination> SelectAll();
 }

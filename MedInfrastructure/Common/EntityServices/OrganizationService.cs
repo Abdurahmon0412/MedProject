@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MedApplication.Common.Dtos.Organization;
+using MedApplication.Common.Dtos.Patient;
 using MedApplication.Common.EntityServices;
 using MedDomain.Entities;
 using MedPersistance.Repositories.OrganizationRepository;
@@ -22,6 +23,20 @@ public class OrganizationService : IOrganizationService
     {
         return _organizationRepository.Get(predicate, asNoTracking).Include(o => o.UserModules)
             .Select( item => _mapper.Map<OrganizationForResultDto>(item));
+    }
+
+    public async ValueTask<IQueryable<PatientForResultDto>> GetAllPatientsByOrganizationId(int organizationId, bool asNoTracking = false)
+    {
+        var organization = await _organizationRepository
+               .Get(o => o.Id == organizationId)
+               .Include(e => e.Patients)
+               .AsNoTracking()
+               .FirstOrDefaultAsync();
+        
+        if(organization == null)
+            throw new Exception("Organization not found!!");
+
+        return _mapper.Map<ICollection<PatientForResultDto>>( organization.Patients).AsQueryable();
     }
 
     public async ValueTask<OrganizationForResultDto?> GetByIdAsync(int organizationId, bool asNoTracking = false, CancellationToken cancellationToken = default)
