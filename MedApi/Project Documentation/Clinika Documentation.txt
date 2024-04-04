@@ -1,0 +1,247 @@
+Musobaqa uchun texnik topshiriq
+Loyiha - Clinika xizmatlar :
+            (bu shifoxona, clinika, stamatalogiya kabi xususiy clinikalarning mijozlarini navbatlarini websayt orqali tizimlashtirish)
+
+    Clinikalar:
+           - MEDPlus
+           - ShifoMED
+           - Darmon$Service
+           - MEDCenter
+           ...
+          
+          
+           * Ro'yxatdan o'tish: 
+                    ismi,
+                    familyasi,
+                    yoshi,
+                    telefon raqami       
+                                        
+           * Login qilish:
+                    login : ismi, 
+                    password : telefon raqami
+
+        ShifoMED ->  Bo'limlar:
+
+                        1. Shifokorlar
+                        2. Xizmatlar
+                        3. Narxlar
+                        
+
+                            > Shifokorlar:          
+                                                    [ doktor qidirish                                ][🔎]              
+                                                     _____________      _____________        _____________
+                                                    |             |    |             |      |             |          
+                                                    |             |    |             |      |             |          
+                                                    |    rasm     |    |    rasm     |      |    rasm     |          
+                                                    |             |    |             |      |             |          
+                                                    |             |    |             |      |             |          
+                                                    |_____________|    |_____________|      |_____________|
+
+                                                    Ahmedov Ozod        Murodov Nosir       Ochilov Karim
+                                                    + info              + info              + info
+                                                    
+                                                    D S C P J S         D s C p J s         d S c P j S 
+                                                     _____________      _____________        _____________
+                                                    |             |    |             |      |             |          
+                                                    |             |    |             |      |             |          
+                                                    |    rasm     |    |    rasm     |      |    rasm     |          
+                                                    |             |    |             |      |             |          
+                                                    |             |    |             |      |             |          
+                                                    |_____________|    |_____________|      |_____________|
+
+                                                    Xoliqov Bobur       Mansurov Jasur      Jumayev Jasur
+                                                    + info              + info              + info
+
+                                                    D S C P J S         d S c P j s         D s C p J s          
+                            > Xizmatlar:
+                                1  Terapevt,
+                                2  Xerurg,
+                                3  Stamatolog,
+                                4  Lor
+                                    ...
+
+                                    Terapevt -> 
+                                                [ terapevt qidirish                       ][🔎]              
+                                                 _____________   _____________    _____________
+                                                |             | |             |  |             |          
+                                                |             | |             |  |             |          
+                                                |    rasm     | |    rasm     |  |    rasm     |          
+                                                |             | |             |  |             |          
+                                                |             | |             |  |             |          
+                                                |_____________| |_____________|  |_____________|
+
+                                                [Murodov Nosir] [Ochilov Karim]  [Ahmedov Ozod ]
+
+                                                >
+
+                                                                    Shifokor        : Ahmedov Ozod
+                                                                                      Terapevt
+                                                                    ish vaqt        : 9:00    16:00
+                                                           RASM     etaj            : 2
+                                                                    mijozlar soni   : 12
+                                                                    xozir           : 6  
+                                                                    5 - mijoz       : 32 daqiqa
+
+                                                        [Navbat olish]      
+
+
+                                                                            (tokeni bor bo'lsa)    (bo'lmasa <-- register | login )              
+                                                                            [[Navbat olish]] ->  
+                                                                                                servise         : ShifoMED
+                                                                                                shifokor        : Ahmedov Ozod [Terapevt]
+                                                                                                etaj            : 2
+                                                                                                xona            : 18 
+                                                                                                navbat          : 13
+                                                                                                bemor           : Malikova Oqila
+                                                                                                ko'rik          : 3
+
+                                                                                                2023.09.03  13:30
+
+
+                                                                                                [Bekor qilish]   
+                                    Xerurg -> 
+                                                [ xerurg qidirish                         ][🔎]              
+                                                 _____________   _____________    _____________
+                                                |             | |             |  |             |          
+                                                |             | |             |  |             |          
+                                                |    rasm     | |    rasm     |  |    rasm     |          
+                                                |             | |             |  |             |          
+                                                |             | |             |  |             |          
+                                                |_____________| |_____________|  |_____________|       
+
+                                                [Xoliqov Bobur] [Mansurov Jasur] [Jumayev Laziz]
+                                                
+                                                >
+                                                                                   
+                                                                    Shifokor        : Jumayev Laziz
+                                                                                      Xerurg
+                                                          RASM      ish vaqt        : 10:00    17:00
+                                                                    xona            : 10 
+                                                                    etaj            : 1
+                                                                    mijozlar soni   : 7
+                                                                    xozir           : 3  
+                                                                    2 - mijoz       : 25 daqiqa
+
+                                                        [Navbat olish]      
+
+
+
+                                                                            [[Navbat olish]] -> 
+                                                                                                servis          : ShifoMED
+                                                                                                shifokor        : Jumayev Jasur [Xerurg]
+                                                                                                navbat          : 13
+                                                                                                xona            : 18 
+                                                                                                etaj            : 2
+                                                                                                bemor           : Davirov G'ayrat
+                                                                                                ko'rik          : 1
+
+                                                                                                2023.09.03  11:30
+
+
+                                                                                                [Bekor qilish]   
+                            > Narxlar:
+                                1  Terapevt          50
+                                2  Xerurg            90   
+                                3  Stamatolog        100
+                                4  Lor               40   
+                                    ...
+
+
+------------------------------------------------------------------------------------------------------------------------
+Shifokor      login : clinika |  password : tel
+
+                                03.09.2023                                                                Ahmedov Ozod
+
+Mijozlar
+        1. Karimova Jamila  ✅
+        2. Hamidova Farida  ✅
+        3. Samadova Komila  ✅
+        4. Sobidova Malika  ✅
+        5. Yusupova Sitora  ✅
+        6. Nabiyeva Nodira  
+        7. Samadova Farida  
+        ...
+        13. Malikova Oqila
+
+
+             Nabiyeva Nodira -> 
+                                1-ko'rik ^
+                                2-ko'rik >
+                                           tashxis     ^                         __________
+                                                        isitma                  |          | 
+                                                        bosh og'riq             |   rasm   |       
+                                                        yo'tal                  |          | 
+                                                        ...                     |__________|    
+
+                                                                                      [save]         
+
+                                                                                    [Navbatdagi]
+             Samadova Farida -> 
+                                1-ko'rik ^
+                                2-ko'rik ^
+                                3-ko'rik ^
+
+            
+-------------------------------------------------------------------------------------------------------------------------
+Admin     login : Clinika   |  password : admin
+              
+
+            Clinika 
+                            > Clinikalar
+                                - MEDPlus             [✏️] [🗑]       
+                                - ShifoMED            [✏️] [🗑]   
+                                - Darmon$Service      [✏️] [🗑]       
+                                - MEDCenter           [✏️] [🗑]   
+                                ...              
+           
+                            [Clinika qo'shish]
+                                            nomi
+                                            address
+                                            rasm
+                                            call senter
+            Shifokor
+                            > Shifokorlar
+                                1  Terapevt,
+                                2  Xerurg,
+                                3  Stamatolog,
+                                4  Lor
+                                    Terapevt ->
+                                                    rasm                resm                rasm
+                                                    Ahmedov Ozod        Murodov Nosir       Ochilov Karim
+                                                    + info              + info              + info
+                                                    
+                                                    D S C P J S         D s C p J s         d S c P j S 
+                                                    [✏️] [🗑]           [✏️] [🗑]           [✏️] [🗑]
+
+                                    Xerurg   ->   
+                                                    rasm                resm                rasm
+                                                    Xoliqov Bobur       Mansurov Jasur      Jumayev Jasur
+                                                    + info              + info              + info
+
+                                                    D S C P J S         d S c P j s         D s C p J s          
+                                                    [✏️] [🗑]           [✏️] [🗑]           [✏️] [🗑]
+                                
+                                [Shifokor qo'shish]
+                                                    ismi,               clinika,            
+                                                    familyasi,          ish vaqti,
+                                                    telefon raqami,     ish kuni, 
+                                                    rasm,               xona raqami,    
+                                                    mutaxasisligi,      malakasi (yil),        
+                                                                                         
+                                                        
+            Xizmatlar
+                    1  Terapevt          50         [✏️] [🗑]            
+                    2  Xerurg            90         [✏️] [🗑]    
+                    3  Stamatolog        100        [✏️] [🗑]
+                    4  Lor               40         [✏️] [🗑]
+                        ...
+                    [ Xizmat qo'shish ]    
+                                xizmat nomi
+                                xizmat narxi
+                                clinika
+
+=========================================================================================================================
+
+                                 __________________
+                                [@code_musobaqa_bot]
+                                 ``````````````````
