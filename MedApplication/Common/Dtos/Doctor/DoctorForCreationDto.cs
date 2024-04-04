@@ -9,5 +9,6 @@ public class DoctorForCreationDto
     public long UserModuleId { get; set; }
     public int? PatientCountByDay { get; set; }
     public int DoctorPlaceId { get; set; }
-    public int? PatientId { get; set; }
+    public int? PatientId { get; set; }   
+
 }
