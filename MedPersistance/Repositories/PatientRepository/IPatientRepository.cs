@@ -16,4 +16,6 @@ public interface IPatientRepository
     ValueTask<Patient> DeleteByIdAsync(int genderId, CancellationToken cancellationToken = default);
 
     ValueTask<Patient> DeleteAsync(Patient gender, CancellationToken cancellationToken = default);
+
+    IQueryable<Patient> SelectAll();
 }

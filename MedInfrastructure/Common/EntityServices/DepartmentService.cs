@@ -28,7 +28,7 @@ public class DepartmentService : IDepartmentService
 
     public async ValueTask<DepartmentForResultDto?> GetByIdAsync(int departmentId, bool asNoTracking = false, CancellationToken cancellationToken = default)
     {
-        var department = _departmentRepository.SelectAll()
+        var department = await _departmentRepository.SelectAll()
             .Where(d => d.Id == departmentId)
             .Include(d => d.Doctors).AsNoTracking().FirstOrDefaultAsync() ?? throw new Exception("Department Not found!!!");
         return _mapper.Map<DepartmentForResultDto>(department);
@@ -40,8 +40,7 @@ public class DepartmentService : IDepartmentService
         //return _departmentRepository.CreateAsync(department, saveChanges, cancellationToken);
 
         var existingDepartment = await _departmentRepository.Get()
-                .Where(a => true)
-                //.Where(o => o.ShortName == department.ShortName && o.Pinfl == organization.Pinfl)
+                .Where(o => o.ShortName == department.ShortName)
                 .FirstOrDefaultAsync();
 
         if (existingDepartment != null)

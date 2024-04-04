@@ -1,6 +1,10 @@
-﻿using MedApplication.Common.EntityServices;
+﻿using AutoMapper;
+using MedApplication.Common.Dtos.Organization;
+using MedApplication.Common.Dtos.Patient;
+using MedApplication.Common.EntityServices;
 using MedDomain.Entities;
 using MedPersistance.Repositories.Patients;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MedInfrastructure.Common.EntityServices;
@@ -8,34 +12,85 @@ namespace MedInfrastructure.Common.EntityServices;
 public class PatientService : IPatientService
 {
     private readonly IPatientRepository _patientRepository;
-    public PatientService(IPatientRepository patientRepository)
+    private readonly IMapper _mapper;
+    public PatientService(IPatientRepository patientRepository, IMapper mapper)
     {
+        _mapper = mapper;
         _patientRepository = patientRepository;
     }
 
-    public IQueryable<Patient> Get(Expression<Func<Patient, bool>>? predicate = default, bool asNoTracking = false)
+    public IQueryable<PatientForResultDto> Get(Expression<Func<Patient, bool>>? predicate = default, bool asNoTracking = false)
     {
-        return _patientRepository.Get(predicate, asNoTracking);
+        return _patientRepository.Get(predicate, asNoTracking).Include(i => i.Doctors)
+           .Select(item => _mapper.Map<PatientForResultDto>(item));
     }
 
-    public ValueTask<Patient?> GetByIdAsync(int patientId, bool asNoTracking = false, CancellationToken cancellationToken = default)
+    public async ValueTask<PatientForResultDto?> GetByIdAsync(int patientId, bool asNoTracking = false, CancellationToken cancellationToken = default)
     {
-        return _patientRepository.GetByIdAsync(patientId, asNoTracking, cancellationToken);
+        var patient = await _patientRepository.SelectAll()
+              .Where(o => o.Id == patientId)
+              .Include(e => e.Doctors)
+              .AsNoTracking()
+              .FirstOrDefaultAsync();
+
+        if (patient == null)
+        {
+            throw new Exception("Organization not found or is inactive");
+        }
+
+        return _mapper.Map<PatientForResultDto>(patient);
     }
 
-    public ValueTask<Patient> CreateAsync(Patient patient, bool saveChanges = true, CancellationToken cancellationToken = default)
+    public async ValueTask<PatientForResultDto> CreateAsync(PatientForCreationDto patient, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        return _patientRepository.CreateAsync(patient, saveChanges, cancellationToken);
+        var existingPatient = await _patientRepository.Get()
+                .Where(a => true)
+                //.Where(o => o.Id == patient.id&& o.Pinfl == organization.Pinfl)
+                .FirstOrDefaultAsync();
+
+        if (existingPatient != null)
+        {
+            throw new Exception("Patient already exists");
+        }
+
+        var newPatient = _mapper.Map<Patient>(patient);
+        newPatient.CreatedDate = DateTime.UtcNow;
+
+        var createdPatient = await _patientRepository.CreateAsync(newPatient, cancellationToken: cancellationToken);
+
+        return _mapper.Map<PatientForResultDto>(createdPatient);
     }
 
-    public ValueTask<Patient> UpdateAsync(Patient patient, bool saveChanges = true, CancellationToken cancellationToken = default)
+    public async ValueTask<PatientForResultDto> UpdateAsync(PatientForUpdateDto patient, bool saveChanges = true, CancellationToken cancellationToken = default)
     {
-        return _patientRepository.UpdateAsync(patient, saveChanges, cancellationToken);
+        var newPatient= await _patientRepository.SelectAll()
+                .Where(o => o.Id == patient.Id)
+                .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+
+        if (newPatient == null)
+        {
+            throw new Exception("Patient does not exist!!!");
+        }
+
+        //neworganization.ModifiedDate = DateTime.UtcNow;
+
+        var updatedPatient = await _patientRepository.UpdateAsync(newPatient, cancellationToken: cancellationToken);
+
+        return _mapper.Map<PatientForResultDto>(updatedPatient);
     }
 
-    public void DeleteByIdAsync(int patientId, bool saveChanges = true, CancellationToken cancellationToken = default)
-        => _patientRepository.DeleteByIdAsync(patientId, cancellationToken);
-    
+    public async ValueTask<PatientForResultDto> DeleteByIdAsync(int patientId, bool saveChanges = true, CancellationToken cancellationToken = default)
+    {
+        var patient = await _patientRepository.SelectAll()
+               .FirstOrDefaultAsync(o => o.Id == patientId);
+
+        if (patient == null)
+        {
+            throw new Exception("Patient not found");
+        }
+
+        return _mapper.Map<PatientForResultDto>(await _patientRepository.DeleteByIdAsync(patientId, cancellationToken));
+    }    
 
     public void DeleteAsync(Patient patient, bool saveChanges = true, CancellationToken cancellationToken = default) 
         => _patientRepository.DeleteAsync(patient, cancellationToken);
