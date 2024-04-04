@@ -24,3 +24,10 @@ VALUES
     (NULL, NULL, 8, 1),                                    -- Holiday
     ('2024-04-09 09:00:00', '2024-04-09 17:00:00', 9, 1),  -- Working Day
     (NULL, NULL, 10, 1);                                   -- Off Day
+
+
+    ALTER TABLE "working_hours"
+ALTER COLUMN "created_date" SET DATA TYPE TIMESTAMP WITH TIME ZONE,
+ALTER COLUMN "modified_date" SET DATA TYPE TIMESTAMP WITH TIME ZONE,
+ALTER COLUMN "from_time" SET DATA TYPE TIMESTAMP WITH TIME ZONE,
+ALTER COLUMN "to_time" SET DATA TYPE TIMESTAMP WITH TIME ZONE

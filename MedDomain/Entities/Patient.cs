@@ -33,7 +33,7 @@ public class Patient : IEntity<int>
     public long UserModuleId { get; set; }
     [Column("address_id")]
     public int AddressId { get; set; }
-    [Column("date_of_birth", TypeName = "timestamp without time zone")]
+    [Column("date_of_birth", TypeName = "timestamp with time zone")]
     public DateTime? DateOfBirth { get; set; }
     [Column("queue_number")]
     public int? QueueNumber { get; set; }
@@ -41,7 +41,7 @@ public class Patient : IEntity<int>
     public DateTime CreatedDate { get; set; }
     [Column("created_user_id")]
     public int? CreatedUserId { get; set; }
-    [Column("modified_date", TypeName = "timestamp without time zone")]
+    [Column("modified_date", TypeName = "timestamp with time zone")]
     public DateTime? ModifiedDate { get; set; }
     [Column("modified_user_id")]
     public int? ModifiedUserId { get; set; }

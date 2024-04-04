@@ -16,4 +16,5 @@ public class DoctorForUpdateDto
     public int? PatientCountByDay { get; set; }
     public int DoctorPlaceId { get; set; }
     public int? PatientId { get; set; }
+
 }
