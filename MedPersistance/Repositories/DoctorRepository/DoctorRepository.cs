@@ -30,4 +30,6 @@ public class DoctorRepository : EntityRepositoryBase<int, Doctor, MContext>, IDo
     {
         return base.DeleteAsync(gender, cancellationToken: cancellationToken);
     }
+
+    public IQueryable<Doctor> SelectAll() => base.SelectAll();
 }

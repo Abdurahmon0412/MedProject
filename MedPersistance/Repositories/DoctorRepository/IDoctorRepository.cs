@@ -16,4 +16,5 @@ public interface IDoctorRepository
     ValueTask<Doctor> DeleteByIdAsync(int genderId, CancellationToken cancellationToken = default);
 
     ValueTask<Doctor> DeleteAsync(Doctor gender, CancellationToken cancellationToken = default);
+    IQueryable<Doctor> SelectAll();
 }

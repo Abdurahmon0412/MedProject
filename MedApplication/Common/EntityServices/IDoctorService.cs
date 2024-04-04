@@ -1,4 +1,6 @@
-﻿using MedDomain.Entities;
+﻿using MedApplication.Common.Dtos.Doctor;
+using MedApplication.Common.Dtos.Organization;
+using MedDomain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ public interface IDoctorService
     /// <param name="predicate"></param>
     /// <param name="asNoTracking"></param>
     /// <returns>Returning the User object</returns>
-    IQueryable<Doctor> Get(Expression<Func<Doctor,
+    IQueryable<DoctorForResultDto> Get(Expression<Func<Doctor,
         bool>>? predicate = default,
         bool asNoTracking = false);
 
@@ -27,7 +29,7 @@ public interface IDoctorService
     /// <param name="asNoTracking"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the User object.</returns>
-    ValueTask<Doctor?> GetByIdAsync(int doctorsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
+    ValueTask<DoctorForResultDto?> GetByIdAsync(int doctorsId, bool asNoTracking = false, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Retrieves a list of doctor based on a collection of user IDs.
@@ -45,7 +47,7 @@ public interface IDoctorService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the created User object.</returns>
-    ValueTask<Doctor> CreateAsync(Doctor doctor, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<DoctorForResultDto> CreateAsync(DoctorForCreationDto doctor, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates an existing user.
@@ -54,7 +56,7 @@ public interface IDoctorService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the updated User object.</returns>
-    ValueTask<Doctor> UpdateAsync(Doctor doctor, bool saveChanges = true, CancellationToken cancellationToken = default);
+    ValueTask<DoctorForResultDto> UpdateAsync(DoctorForUpdateDto doctor, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user by their unique identifier.
@@ -63,7 +65,7 @@ public interface IDoctorService
     /// <param name="saveChanges"></param>
     /// <param name="cancellationToken"></param>
     /// <returns>Returning the deleted User object.</returns>
-    void DeleteByIdAsync(int doctorId, bool saveChanges = true, CancellationToken cancellationToken = default);
+    public ValueTask<DoctorForResultDto> DeleteByIdAsync(int doctorId, bool saveChanges = true, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes a user.
